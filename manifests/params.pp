@@ -11,13 +11,13 @@ class puppet::params {
 
   $dns_alt_names = undef
   $fileserver_conf = undef
+  $hiera_source = undef
   $puppetdb = false
   $puppetdb_port = 8081
   $puppetdb_server = undef
   $puppetdb_version = 'latest'
   $server_ca_enabled = true
   $server_certname = undef
-  $server_hiera_source = undef
   $server_java_opts = '-Xms2g -Xmx2g -XX:MaxPermSize=256m'
   $server_log_dir = '/var/log/puppetserver'
   $server_log_file = 'puppetserver.log'
