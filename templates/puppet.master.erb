@@ -1,0 +1,21 @@
+[master]
+<% if @dns_alt_names -%>
+    dns_alt_names = <%= @dns_alt_names %>
+<% end -%>
+    autosign = $confdir/autosign.conf
+    parser = future
+    strict_variables = true
+    ca = <%= @ca_enabled %>
+<% if @reports -%>
+    reports = <%= @reports %>
+<% end -%>
+<% if @certname -%>
+    certname = <%= @certname %>
+<% end -%>
+<%  if @puppetdb -%>
+    storeconfigs = true
+    storeconfigs_backend = puppetdb
+<% end -%>
+<% if @hiera_source -%>
+    hiera_config = $confdir/hiera.yaml
+<% end -%>
