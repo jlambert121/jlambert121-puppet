@@ -32,8 +32,8 @@ describe 'puppet', :type => :class do
       it { expect { should create_class('puppet') }.to raise_error(/valid values for runmode are/) }
     end
 
-    context 'bad server_hiera_source' do
-      let(:params) { { :server_hiera_source => 'breakme' } }
+    context 'bad hiera_source' do
+      let(:params) { { :hiera_source => 'breakme' } }
       it { expect { should create_class('puppet') }.to raise_error(/must be a puppet resource/) }
     end
 
@@ -49,7 +49,7 @@ describe 'puppet', :type => :class do
 
     context 'bad fileserver_conf' do
       let(:params) { { :fileserver_conf => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/array of hashes/) }
+      it { expect { should create_class('puppet') }.to raise_error(/be a of hash of mountpoints/) }
     end
 
   end

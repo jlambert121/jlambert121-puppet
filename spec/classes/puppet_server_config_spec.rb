@@ -76,7 +76,7 @@ describe 'puppet::server::config', :type => :class do
     end
 
     context 'with hiera_source' do
-      let(:pre_condition) { 'class { "puppet": server => true, server_hiera_source => "puppet:///data/hiera.yaml" }'}
+      let(:pre_condition) { 'class { "puppet": server => true, hiera_source => "puppet:///data/hiera.yaml" }'}
       it { should contain_concat__fragment('puppet_master').with(:content => /hiera_config/) }
       it { should contain_file('/etc/puppet/hiera.yaml').with(:source => 'puppet:///data/hiera.yaml') }
     end

@@ -1,14 +1,4 @@
-# document me
-# [*fileserver_conf*]
-#   Hash: Mountpoints and permissions on the master
-#   Fomrat: { mountpoint => {
-#               parameter => value
-#             }
-#           }
-#   Default: ''
-
-
-
+#
 class puppet (
   $agent                  = true,
   $server                 = false,
@@ -23,13 +13,13 @@ class puppet (
   # Server
   $dns_alt_names          = $::puppet::params::dns_alt_names,
   $fileserver_conf        = $::puppet::params::fileserver_conf,
+  $hiera_source           = $::puppet::params::hiera_source,
   $puppetdb               = $::puppet::params::puppetdb,
   $puppetdb_port          = $::puppet::params::puppetdb_port,
   $puppetdb_server        = $::puppet::params::puppetdb_server,
   $puppetdb_version       = $::puppet::params::puppetdb_version,
   $server_ca_enabled      = $::puppet::params::server_ca_enabled,
   $server_certname        = $::puppet::params::server_certname,
-  $server_hiera_source    = $::puppet::params::server_hiera_source,
   $server_java_opts       = $::puppet::params::server_java_opts,
   $server_log_dir         = $::puppet::params::server_log_dir,
   $server_log_file        = $::puppet::params::server_log_file,
@@ -44,8 +34,8 @@ class puppet (
 
   validate_re($runmode, ['cron', 'service', 'none'], 'Puppet: valid values for runmode are cron, service, and none')
 
-  if $server_hiera_source {
-    validate_re($server_hiera_source, '^puppet', 'Puppet: server_hiera_source must be a puppet resource')
+  if $hiera_source {
+    validate_re($hiera_source, '^puppet', 'Puppet: hiera_source must be a puppet resource')
   }
 
   if !is_integer($puppetdb_port) {
@@ -56,8 +46,8 @@ class puppet (
     fail('Puppet: puppetdb_server is required with puppetdb')
   }
 
-  if $fileserver_conf and !is_array($fileserver_conf) {
-    fail('Puppet: fileserver_conf must be an array of hashes')
+  if $fileserver_conf and !is_hash($fileserver_conf) {
+    fail('Puppet: fileserver_conf must be a of hash of mountpoints')
   }
 
   if ( $agent or $server ) {

@@ -1,7 +1,7 @@
 ---
 language: ruby
 bundler_args: --without development
-script: "bundle exec rake validate && bundle exec rake test SPEC_OPTS='--format documentation'"
+script: "bundle install && bundle exec rake validate && bundle exec rake lint && bundle exec rake spec SPEC_OPTS='--format documentation'"
 matrix:
   fast_finish: true
   include:
@@ -15,5 +15,8 @@ matrix:
     env: PUPPET_GEM_VERSION="~> 3.7.0"
 notifications:
   email: false
+  hipchat:
+      rooms:
+        - secure: "iSPprJS+t7TDKKHdvr2pRcMe51IlYvjOz+BzC2Ih3R9gkLFHjqLgCemGAi6Ab1URjRuhe8rb0RK1gDb0DHlrWMp0PVQTJyKH+67saK3eWZC59fKW1eJtjHgiMNYzmmi+Yq0zOhUnLILU/D77KvImn5T0bWp2L6OW0XXxoJOTEj4="
   on_success: always
   on_failure: always
