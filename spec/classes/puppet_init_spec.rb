@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'puppet', :type => :class do
-  let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :osfamily => 'RedHat' } }
+  let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :osfamily => 'RedHat', :operatingsystemmajrelease => '7', :id => '0', :path => '/bin' } }
 
   it { should create_class('puppet') }
 

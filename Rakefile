@@ -14,14 +14,13 @@ exclude_paths = [
   "spec/**/*",
 ]
 
-Rake::Task[:lint].clear
-PuppetLint::RakeTask.new :lint do |config|
-  config.ignore_paths = exclude_paths
-  config.log_format = '%{path}:%{linenumber}:%{check}:%{KIND}:%{message}'
-  config.disable_checks = [ "class_inherits_from_params_class", "80chars", "autoloader_layout" ]
-  config.fail_on_warnings = true
-#  config.relative = true
-end
+PuppetLint.configuration.relative = true
+PuppetLint.configuration.fail_on_warnings
+PuppetLint.configuration.ignore_paths = exclude_paths
+PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
+PuppetLint.configuration.send('relative')
+PuppetLint.configuration.send('disable_80chars')
+PuppetLint.configuration.send('disable_class_inherits_from_params_class')
 PuppetSyntax.exclude_paths = exclude_paths
 
 desc "Run acceptance tests"
