@@ -4,7 +4,7 @@ class puppet::server::config (
   $certname        = $::puppet::server_certname,
   $config_dir      = $::puppet::params::server_config_dir,
   $dns_alt_names   = $::puppet::dns_alt_names,
-  $fileserver      = $::puppet::server_fileserver_conf,
+  $fileserver      = $::puppet::fileserver_conf,
   $hiera_source    = $::puppet::hiera_source,
   $java_opts       = $::puppet::server_java_opts,
   $log_dir         = $::puppet::server_log_dir,
