@@ -100,7 +100,7 @@ class puppet::server::config (
     # Template uses
     # - $fileserver
     file { '/etc/puppet/fileserver.conf':
-      content => template('puppet/fileserver.conf.erb'),
+      content => template('puppet/server/fileserver.conf.erb'),
     }
   }
 
