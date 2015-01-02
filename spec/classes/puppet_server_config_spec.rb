@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'puppet::server::config', :type => :class do
 
   describe 'defaults' do
-    let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'RedHat' } }
+    let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'RedHat', :operatingsystemmajrelease => '7', :id => '0', :path => '/bin' } }
     let(:pre_condition) { 'class { "puppet": }' }
 
     it { should_not contain_concat__fragment('puppet_master') }
@@ -16,20 +16,20 @@ describe 'puppet::server::config', :type => :class do
     it { should contain_file('/etc/puppetserver/conf.d/webserver.conf').with(:ensure => 'absent') }
 
     context 'redhat' do
-      let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'RedHat' } }
+      let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'RedHat', :operatingsystemmajrelease => '7', :id => '0', :path => '/bin' } }
       let(:pre_condition) { 'class { "puppet": }' }
       it { should contain_file('/etc/sysconfig/puppetserver').with(:ensure => 'absent') }
     end
 
     context 'debian' do
-      let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'Debian' } }
+      let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'Debian', :id => '0', :path => '/bin' } }
       let(:pre_condition) { 'class { "puppet": }' }
       it { should contain_file('/etc/default/puppetserver').with(:ensure => 'absent') }
     end
   end
 
   describe 'with server' do
-    let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'RedHat' } }
+    let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'RedHat', :operatingsystemmajrelease => '7', :id => '0', :path => '/bin' } }
 
     context 'all oses' do
       let(:pre_condition) { 'class { "puppet": server => true}' }
@@ -58,7 +58,7 @@ describe 'puppet::server::config', :type => :class do
     end
 
     context 'debian' do
-      let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'Debian' } }
+      let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'Debian', :id => '0', :path => '/bin' } }
       let(:pre_condition) { 'class { "puppet": server => true}' }
       it { should contain_file('/etc/default/puppetserver') }
     end
