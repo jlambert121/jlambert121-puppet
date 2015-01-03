@@ -16,8 +16,6 @@
     default_schedules = false
     report            = true
     environment       = <%= @environment %>
-    strict_variables  = true
-    trusted_node_data = true
 <% if !@use_srv_records -%>
     server            = <%= if ( @puppetmaster and !@puppetmaster.empty? ) then @puppetmaster else @fqdn end %>
 <% end -%>
