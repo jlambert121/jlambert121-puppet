@@ -1,6 +1,6 @@
 {
   "name": "evenup-puppet",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Justin Lambert",
   "summary": "Module to manage puppet, puppet-server",
   "license": "Apache-2.0",
