@@ -1,2 +1,6 @@
-2014-12-09 0.1.0
+20150105 - v0.2.0
+  Support puppetserver 1.0
+  Fix fileserver templates
+  Enable trusted_node_data
+20141209 - v0.1.0
   Initial release
