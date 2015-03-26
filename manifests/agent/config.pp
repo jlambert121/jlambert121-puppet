@@ -20,7 +20,7 @@ class puppet::agent::config (
     }
 
     file { '/etc/default/puppet':
-      content => inline_template('START=<%= @start %>')
+      content => inline_template('START=<%= @start %>'),
     }
   }
 }

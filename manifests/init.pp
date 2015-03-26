@@ -56,13 +56,13 @@ class puppet (
     $ensure = 'absent'
   }
 
-  class { 'puppet::common': }
+  class { '::puppet::common': }
 
-  class { 'puppet::agent':
+  class { '::puppet::agent':
     require => Class['puppet::common'],
     } ->
 
-  class { 'puppet::server':
+  class { '::puppet::server':
     require => Class['puppet::common'],
   }
 

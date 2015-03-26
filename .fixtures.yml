@@ -1,7 +1,13 @@
 fixtures:
-  repositories:
-    concat: "https://github.com/puppetlabs/puppetlabs-concat.git"
-    firewall: "https://github.com/puppetlabs/puppetlabs-firewall.git"
-    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+  forge_modules:
+    concat:
+      repo: "puppetlabs/concat"
+      ref: "1.1.0"
+    firewall:
+      repo: "puppetlabs/firewall"
+      ref: "1.2.0"
+    stdlib:
+      repo: "puppetlabs/stdlib"
+      ref: "4.2.0"
   symlinks:
     puppet: "#{source_dir}"

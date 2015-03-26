@@ -51,42 +51,42 @@ class puppet::server::config (
   # Template uses
   # - $java_opts
   file { "${config_dir}/puppetserver":
-    content => template("${module_name}/server/puppetserver.sysconfig.erb")
+    content => template("${module_name}/server/puppetserver.sysconfig.erb"),
   }
 
   # Template uses
   # - $ca_enabled
   file { '/etc/puppetserver/bootstrap.cfg':
-    content => template("${module_name}/server/bootstrap.cfg.erb")
+    content => template("${module_name}/server/bootstrap.cfg.erb"),
   }
 
   # Template uses
   # - $server_log_dir
   # - $server_log_file
   file { '/etc/puppetserver/logback.xml':
-    content => template("${module_name}/server/logback.xml.erb")
+    content => template("${module_name}/server/logback.xml.erb"),
   }
 
   file { '/etc/puppetserver/conf.d/ca.conf':
-    content => template("${module_name}/server/ca.conf.erb")
+    content => template("${module_name}/server/ca.conf.erb"),
   }
 
   file { '/etc/puppetserver/conf.d/global.conf':
-    content => template("${module_name}/server/global.conf.erb")
+    content => template("${module_name}/server/global.conf.erb"),
   }
 
   # Template uses
   # - $ruby_paths
   file { '/etc/puppetserver/conf.d/os-settings.conf':
-    content => template("${module_name}/server/os-settings.conf.erb")
+    content => template("${module_name}/server/os-settings.conf.erb"),
   }
 
   file { '/etc/puppetserver/conf.d/puppetserver.conf':
-    content => template("${module_name}/server/puppetserver.conf.erb")
+    content => template("${module_name}/server/puppetserver.conf.erb"),
   }
 
   file { '/etc/puppetserver/conf.d/webserver.conf':
-    content => template("${module_name}/server/webserver.conf.erb")
+    content => template("${module_name}/server/webserver.conf.erb"),
   }
 
   if ( $server and $hiera_source ) {

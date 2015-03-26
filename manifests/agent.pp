@@ -3,7 +3,7 @@ class puppet::agent (
 
 ){
 
-  class { 'puppet::agent::config': } ~>
-  class { 'puppet::agent::service': }
+  class { '::puppet::agent::config': } ~>
+  class { '::puppet::agent::service': }
 
 }
