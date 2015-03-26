@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'puppet::agent::service', :type => :class do
-  let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :osfamily => 'RedHat', :operatingsystemmajrelease => '7', :id => '0', :path => '/bin' } }
+  let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :osfamily => 'RedHat', :operatingsystemmajrelease => '7', :id => '0', :path => '/bin', :kernel => 'Linux' } }
 
   describe 'defaults' do
     let(:pre_condition) { 'include puppet' }

@@ -26,7 +26,7 @@ class puppet::agent::service (
     }
     'service': {
       cron { 'puppet':
-        ensure => 'absent'
+        ensure => 'absent',
       }
 
       service { 'puppet':
@@ -36,7 +36,7 @@ class puppet::agent::service (
     }
     'none': {
       cron { 'puppet':
-        ensure => 'absent'
+        ensure => 'absent',
       }
 
       service { 'puppet':
