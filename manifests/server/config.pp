@@ -3,7 +3,6 @@ class puppet::server::config (
   $ca_enabled      = $::puppet::server_ca_enabled,
   $certname        = $::puppet::server_certname,
   $config_dir      = $::puppet::params::server_config_dir,
-  $dns_alt_names   = $::puppet::dns_alt_names,
   $fileserver      = $::puppet::fileserver_conf,
   $hiera_source    = $::puppet::hiera_source,
   $java_opts       = $::puppet::server_java_opts,
@@ -36,7 +35,6 @@ class puppet::server::config (
     # Template uses
     # - $ca_enabled
     # - $certname
-    # - $dns_alt_names
     # - $hiera_source
     # - $puppetdb
     # - $reports
