@@ -36,7 +36,6 @@ describe 'puppet::server::config', :type => :class do
 
       it { should contain_file('/var/log/puppetserver').with(:ensure => 'directory') }
       it { should contain_concat__fragment('puppet_master').with(:content => /ca = true/) }
-      it { should_not contain_concat__fragment('puppet_master').with(:content => /dns_alt_names/) }
       it { should_not contain_concat__fragment('puppet_master').with(:content => /reports/) }
       it { should_not contain_concat__fragment('puppet_master').with(:content => /certname/) }
       it { should_not contain_concat__fragment('puppet_master').with(:content => /storeconfigs/) }
@@ -86,11 +85,6 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_file('/etc/puppet/routes.yaml') }
       it { should contain_file('/etc/puppet/puppetdb.conf').with(:content => /db\.example\.com/) }
       it { should contain_concat__fragment('puppet_master').with(:content => /storeconfigs/) }
-    end
-
-    context 'with dns_alt_names' do
-      let(:pre_condition) { 'class { "puppet": server => true, dns_alt_names => "puppet.example.com" }'}
-      it { should contain_concat__fragment('puppet_master').with(:content => /dns_alt_names/) }
     end
 
     context 'with reports' do

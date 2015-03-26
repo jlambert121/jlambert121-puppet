@@ -11,6 +11,7 @@ describe 'puppet::common', :type => :class do
     it { should contain_concat__fragment('puppet_main') }
     it { should_not contain_concat__fragment('puppet_main').with( :content => /ca_server/ ) }
     it { should_not contain_concat__fragment('puppet_main').with( :content => /use_srv_records/ ) }
+    it { should_not contain_concat__fragment('puppet_main').with( :content => /dns_alt_names/ ) }
     it { should contain_file('/etc/puppet/auth.conf') }
   end
 
@@ -39,6 +40,11 @@ describe 'puppet::common', :type => :class do
     let(:pre_condition) { 'class{"::puppet": use_srv_records => true, srv_domain => "example.com" }'}
     it { should contain_concat__fragment('puppet_main').with( :content => /use_srv_records = true/ ) }
     it { should contain_concat__fragment('puppet_main').with( :content => /srv_domain = example\.com/ ) }
+  end
+
+  context 'with dns_alt_names' do
+    let(:pre_condition) { 'class { "puppet": server => true, dns_alt_names => "puppet.example.com" }'}
+    it { should contain_concat__fragment('puppet_main').with(:content => /dns_alt_names/) }
   end
 
 end
