@@ -25,4 +25,7 @@
     use_srv_records = true
     srv_domain = <%= @srv_domain %>
 <% end -%>
+<% if @dns_alt_names -%>
+    dns_alt_names = <%= @dns_alt_names %>
+<% end -%>
 

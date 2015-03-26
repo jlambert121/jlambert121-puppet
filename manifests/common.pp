@@ -3,6 +3,7 @@ class puppet::common(
   $agent           = $::puppet::agent,
   $server          = $::puppet::server,
   $ca_server       = $::puppet::ca_server,
+  $dns_alt_names   = $::puppet::dns_alt_names,
   $ensure          = $::puppet::ensure,
   $use_srv_records = $::puppet::use_srv_records,
   $srv_domain      = $::puppet::srv_domain,
