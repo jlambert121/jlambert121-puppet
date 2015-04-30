@@ -1,14 +1,4 @@
 #
-
-
-##### TODO
-# add /opt/puppetlabs/bin to path
-# set environment_timeout in puppet master config.  0 or unlimited http://docs.puppetlabs.com/puppet/latest/reference/environments_configuring.html#environmenttimeout
-# http://docs.puppetlabs.com/puppet/latest/reference/ssl_autosign.html
-
-
-
-
 class puppet (
   Boolean                                      $agent           = true,
   Boolean                                      $server          = false,

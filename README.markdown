@@ -9,9 +9,10 @@
     * [Agent Configuration](#agent-configuration)
     * [Server Configuration](#server-configuration)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
-7. [Changelog/Contributors](#changelog-contributors)
+6. [Limitations - OS compatibility, etc.](#limitations)
+7. [TODO](#todo)
+8. [Development - Guide for contributing to the module](#development)
+9. [Changelog/Contributors](#changelog-contributors)
 
 ## Overview
 
@@ -208,7 +209,14 @@ Default: latest
 ## Limitations
 
 ### General
+
 This module is acceptance tested on CentOS 6.5, CentOS 7.0, Ubuntu 12.04, and Ubuntu 14.04.  Feedback on other platforms/versions would be appreciated
+
+## TODO
+
+[ ] Add /opt/puppetlabs/bin to PATH
+[ ] Support setting [environment_timeout](http://docs.puppetlabs.com/puppet/latest/reference/environments_configuring.html#environmenttimeout)
+[ ] Support configuring [autosign](http://docs.puppetlabs.com/puppet/latest/reference/ssl_autosign.html)
 
 ## Development
 
