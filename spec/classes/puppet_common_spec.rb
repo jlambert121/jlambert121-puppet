@@ -6,23 +6,12 @@ describe 'puppet::common', :type => :class do
   describe 'default' do
     let(:pre_condition) { 'include ::puppet' }
 
-    it { should contain_package('puppet') }
-    it { should contain_concat('/etc/puppet/puppet.conf') }
+    it { should contain_concat('/etc/puppetlabs/puppet/puppet.conf') }
     it { should contain_concat__fragment('puppet_main') }
     it { should_not contain_concat__fragment('puppet_main').with( :content => /ca_server/ ) }
     it { should_not contain_concat__fragment('puppet_main').with( :content => /use_srv_records/ ) }
-    it { should_not contain_concat__fragment('puppet_main').with( :content => /dns_alt_names/ ) }
-    it { should contain_file('/etc/puppet/auth.conf') }
-  end
-
-  describe 'set puppet version' do
-    let(:pre_condition) { 'class {"::puppet": puppet_version => "3.7.3"}' }
-    it { should contain_package('puppet').with(:ensure => '3.7.3') }
-  end
-
-  describe 'without agent or server' do
-    let(:pre_condition) { 'class {"::puppet": agent => false, server => false }' }
-    it { should contain_package('puppet').with(:ensure => 'absent') }
+    it { should_not contain_concat__fragment('puppet_main').with(:content => /certname/) }
+    it { should contain_file('/etc/puppetlabs/puppet/auth.conf') }
   end
 
   describe 'with ca_server' do
@@ -42,9 +31,9 @@ describe 'puppet::common', :type => :class do
     it { should contain_concat__fragment('puppet_main').with( :content => /srv_domain = example\.com/ ) }
   end
 
-  context 'with dns_alt_names' do
-    let(:pre_condition) { 'class { "puppet": server => true, dns_alt_names => "puppet.example.com" }'}
-    it { should contain_concat__fragment('puppet_main').with(:content => /dns_alt_names/) }
+  context 'with server_certname' do
+    let(:pre_condition) { 'class { "puppet": server => true, server_certname => "puppet.example.com" }'}
+    it { should contain_concat__fragment('puppet_main').with(:content => /certname/) }
   end
 
 end

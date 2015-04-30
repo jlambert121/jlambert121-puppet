@@ -14,22 +14,22 @@ describe 'puppet', :type => :class do
   describe 'error handling' do
     context 'bad use_srv_records' do
       let(:params) { { :use_srv_records => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/is not a boolean/) }
+      it { expect { should create_class('puppet') }.to raise_error(/to have type Boolean/) }
     end
 
     context 'bad puppetdb' do
       let(:params) { { :puppetdb => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/is not a boolean/) }
+      it { expect { should create_class('puppet') }.to raise_error(/to have type Boolean/) }
     end
 
     context 'bad server_ca_enabled' do
       let(:params) { { :server_ca_enabled => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/is not a boolean/) }
+      it { expect { should create_class('puppet') }.to raise_error(/to have type Boolean/) }
     end
 
     context 'bad runmode' do
       let(:params) { { :runmode => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/valid values for runmode are/) }
+      it { expect { should create_class('puppet') }.to raise_error(/to have type Enum\['cron', 'service', 'none'\]/) }
     end
 
     context 'bad hiera_source' do
@@ -39,7 +39,7 @@ describe 'puppet', :type => :class do
 
     context 'bad puppetdb_port' do
       let(:params) { { :puppetdb_port => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/must be an integer/) }
+      it { expect { should create_class('puppet') }.to raise_error(/to have type Integer/) }
     end
 
     context 'puppetdb, no server' do
@@ -49,7 +49,7 @@ describe 'puppet', :type => :class do
 
     context 'bad fileserver_conf' do
       let(:params) { { :fileserver_conf => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/be a of hash of mountpoints/) }
+      it { expect { should create_class('puppet') }.to raise_error(/to have type Optional\[Hash\[String/) }
     end
 
   end

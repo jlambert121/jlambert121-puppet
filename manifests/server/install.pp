@@ -29,17 +29,9 @@ class puppet::server::install (
   }
 
   # Set up environments
-  file { '/etc/puppet/environments':
+  file { '/etc/puppetlabs/code/environments':
     ensure => 'directory',
     mode   => '0755',
   }
 
-  # Remove old dirs to avoid confusion
-  file { ['/etc/puppet/modules', '/etc/puppet/manifests']:
-    ensure  => 'absent',
-    purge   => true,
-    recurse => true,
-    force   => true,
-    require => Package['puppetserver'],
-  }
 }

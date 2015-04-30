@@ -3,10 +3,11 @@ require 'beaker-rspec/helpers/serverspec'
 
 unless ENV['BEAKER_provision'] == 'no'
   hosts.each do |host|
-    install_puppet
-  end
-
-  hosts.each do |host|
+    on host, "yum -y localinstall http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm"
+    on host, "yum install -y puppet-agent"
+    # Ensure `puppet` is in the path
+    on host, "ln -s /opt/puppetlabs/bin/puppet /usr/bin/puppet"
+#    on host "curl -O http://apt.puppetlabs.com/puppetlabs-release-pc1-wheezy.deb ; dpkg -i puppetlabs-release-pc1-wheezy.deb"
   end
 end
 
@@ -21,19 +22,18 @@ RSpec.configure do |c|
   c.before :suite do
     hosts.each do |host|
       # Install module and dependencies
-      copy_module_to(host, :source => proj_root, :module_name => 'puppet', :target_module_path => '/etc/puppet/environments/production/modules')
+      copy_module_to(host, :source => proj_root, :module_name => 'puppet', :target_module_path => '/etc/puppetlabs/code/environments/production/modules')
       hosts.each do |host|
-        # Set up envnrionments dir
-        on host, "mkdir -p /etc/puppet/environments/production/modules"
-        on host, "chown -R puppet:puppet /etc/puppet/environments"
+        on host, puppet('module', 'install', '--target-dir', '/etc/puppetlabs/code/environments/production/modules', 'puppetlabs-concat'), { :acceptable_exit_codes => [0,1] }
+        on host, puppet('module', 'install', '--target-dir', '/etc/puppetlabs/code/environments/production/modules', 'puppetlabs-firewall'), { :acceptable_exit_codes => [0,1] }
+        on host, puppet('module', 'install', '--target-dir', '/etc/puppetlabs/code/environments/production/modules', 'puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
 
-        # For puppet 3.x need to point default modules dir to environment modules dir
-        on host, "rm -rf /etc/puppet/modules"
-        on host, "ln -s /etc/puppet/environments/production/modules /etc/puppet/modules"
+        # needed for puppetlabs/concat
+        on host, "yum -y install ruby"
 
-        on host, puppet('module', 'install', '--target-dir', '/etc/puppet/environments/production/modules', 'puppetlabs-concat'), { :acceptable_exit_codes => [0,1] }
-        on host, puppet('module', 'install', '--target-dir', '/etc/puppet/environments/production/modules', 'puppetlabs-firewall'), { :acceptable_exit_codes => [0,1] }
-        on host, puppet('module', 'install', '--target-dir', '/etc/puppet/environments/production/modules', 'puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
+        # puppet 4.0.0 is broken with obseleted packages
+        # https://tickets.puppetlabs.com/browse/PUP-4497
+        on host, "yum -y update"
 
         # Puppetserver listens to ipv6 undefined address if loaded, disable ipv6 for tests
         # After SERVER-248 is completed, test IPV4 and IPV6

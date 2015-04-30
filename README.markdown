@@ -15,17 +15,13 @@
 
 ## Overview
 
-A puppet module to manage puppet and puppetserver (the closure server, not ruby).  Please see warnings below.
+A puppet module to manage puppet-agent and puppetserver (the closure server, not ruby).
 
 ## Module Description
 
-**WARNING**: This module is currently intended for bleeding edge/testing environments only.  It will become stable after the puppet 4.0 release
+This is a puppet module to manage puppet >= 4.0.0 and puppetserver >= 2.0.0.
 
-**WARNING**: This module only supports environment directories and will purge /etc/puppet/modules and /etc/puppet manifests
-
-This is a very opinionated module enforcning currently optional features that will be default or required in puppet 4.  When
-puppet 4 nightly packages are available, this module will be updated to use those packages to ensure compatibility with
-puppet 4 when it is released.
+Currently acceptance tests are a bit wonky due to beaker's inability to handle puppet AIO packages
 
 ## Setup
 
@@ -33,7 +29,7 @@ puppet 4 when it is released.
 
 * puppet and puppetserver services
 * cron entry (if desired) for scheduled puppet runs
-* /etc/puppet.conf, /etc/puppetserver/*
+* /etc/puppetlabs/puppet/*, /etc/puppetlabs/puppetserver/*
 
 
 ### Beginning with puppet
@@ -91,9 +87,7 @@ String.  Domain to use for DNS SRV records
 Default: undef
 
 #####`runmode`
-String.  How the puppet agent runs should be scheduled.
-
-Allowed values: cron, service, none
+Enum['cron', 'service', 'none'].  How the puppet agent runs should be scheduled.
 
 Default: cron
 
@@ -110,12 +104,12 @@ Boolean.  Whether or not the server should be installed
 Default: false
 
 #####`dns_alt_names`
-String.  Alternative DNS names for this server
+Array[String].  Alternative DNS names for this server
 
 Default: undef
 
 #####`fileserver_conf`
-Hash.  Fileserver mounts to configure
+Hash[String, Hash[String, String]].  Fileserver mounts to configure
 
 Default: undef
 
@@ -179,14 +173,9 @@ String.  Name of puppetserver logfile
 Default:  puppetserver.log
 
 #####`server_reports`
-String.  List of reports to enable
+Array[String].  List of reports to enable
 
 Default: undef
-
-#####`server_ruby_paths`
-String.  Ruby paths included by the puppetserver
-
-Default: varies by OS
 
 #####`server_version`
 String.  Version of puppetserver to install.
@@ -205,6 +194,7 @@ Default: latest
 #### Private Classes
 
 * `puppet::agent`: Controlls ordering and notfications for agent manipulation
+* `puppet::agent::install`: Installs puppet-agent
 * `puppet::agent::config`: Manages agent configuration
 * `puppet::agent::service`: Manages agent service and cron entries
 * `puppet::common`: Common packages and settings for agent and server

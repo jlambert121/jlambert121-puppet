@@ -1,7 +1,7 @@
 # document me
 class puppet::params {
 
-  $puppet_version = 'latest'
+  $agent_version = 'latest'
   $ca_server = undef
   $use_srv_records = false
   $srv_domain = undef
@@ -26,18 +26,9 @@ class puppet::params {
 
   case $::osfamily {
     'Debian': {
-      $server_ruby_paths = '/usr/lib/ruby/vendor_ruby/'
       $server_config_dir = '/etc/default'
     }
     'RedHat': {
-      case $::operatingsystemmajrelease {
-        6: {
-          $server_ruby_paths = '/usr/lib/ruby/site_ruby/1.8'
-        }
-        default: {
-          $server_ruby_paths = '/usr/share/ruby/vendor_ruby/'
-        }
-      }
       $server_config_dir = '/etc/sysconfig'
     }
     default: {
