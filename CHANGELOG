@@ -1,3 +1,4 @@
+  Requires puppet-agent 1.0/puppetserver 2.0
 20150105 - v0.2.0
   Support puppetserver 1.0
   Fix fileserver templates
