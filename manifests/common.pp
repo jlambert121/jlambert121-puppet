@@ -1,36 +1,25 @@
 # document me
 class puppet::common(
   $agent           = $::puppet::agent,
-  $server          = $::puppet::server,
   $ca_server       = $::puppet::ca_server,
-  $dns_alt_names   = $::puppet::dns_alt_names,
+  $certname        = $::puppet::server_certname,
   $ensure          = $::puppet::ensure,
-  $use_srv_records = $::puppet::use_srv_records,
+  $server          = $::puppet::server,
   $srv_domain      = $::puppet::srv_domain,
-  $puppet_version  = $::puppet::puppet_version,
+  $use_srv_records = $::puppet::use_srv_records,
 ) {
 
-  if $ensure == 'present' {
-    $version = $puppet_version
-  } else {
-    $version = 'absent'
-  }
-
-  package { 'puppet':
-    ensure  => $version,
-  }
-
-  concat { '/etc/puppet/puppet.conf':
+  concat { '/etc/puppetlabs/puppet/puppet.conf':
     ensure => $ensure,
   }
 
   concat::fragment { 'puppet_main':
-    target  => '/etc/puppet/puppet.conf',
+    target  => '/etc/puppetlabs/puppet/puppet.conf',
     content => template("${module_name}/puppet.main.erb"),
     order   => '01',
   }
 
-  file { '/etc/puppet/auth.conf':
+  file { '/etc/puppetlabs/puppet/auth.conf':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',

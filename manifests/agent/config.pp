@@ -7,7 +7,7 @@ class puppet::agent::config (
 ) {
 
   concat::fragment { 'puppet_agent':
-    target  => '/etc/puppet/puppet.conf',
+    target  => '/etc/puppetlabs/puppet/puppet.conf',
     content => template("${module_name}/puppet.agent.erb"),
     order   => '05',
   }

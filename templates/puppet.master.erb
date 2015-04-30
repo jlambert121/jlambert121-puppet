@@ -1,20 +1,19 @@
 [master]
-    # Puppet 4 defaults
-    trusted_node_data = true
-    immutable_node_data = true
-    parser = future
-    autosign = $confdir/autosign.conf
-    ca = <%= @ca_enabled %>
-<% if @reports -%>
-    reports = <%= @reports %>
+  vardir = /opt/puppetlabs/server/data/puppetserver
+  logdir = /var/log/puppetlabs/puppetserver
+  rundir = /var/run/puppetlabs/puppetserver
+  pidfile = /var/run/puppetlabs/puppetserver/puppetserver.pid
+  codedir = /etc/puppetlabs/code
+
+  always_cache_features = true
+  ca = <%= @ca_enabled %>
+<% if @dns_alt_names -%>
+  dns_alt_names = <%= @dns_alt_names.join(', ') %>
 <% end -%>
-<% if @certname -%>
-    certname = <%= @certname %>
+<% if @reports -%>
+  reports = <%= @reports.join(', ') %>
 <% end -%>
 <%  if @puppetdb -%>
-    storeconfigs = true
-    storeconfigs_backend = puppetdb
-<% end -%>
-<% if @hiera_source -%>
-    hiera_config = $confdir/hiera.yaml
+  storeconfigs = true
+  storeconfigs_backend = puppetdb
 <% end -%>

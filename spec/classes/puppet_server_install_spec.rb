@@ -6,9 +6,7 @@ describe 'puppet::server::install', :type => :class do
   describe 'default' do
     let(:pre_condition) { 'class {"::puppet": server => true}' }
     it { should contain_package('puppetserver').with(:ensure => 'latest') }
-    it { should contain_file('/etc/puppet/environments') }
-    it { should contain_file('/etc/puppet/manifests').with(:ensure => 'absent') }
-    it { should contain_file('/etc/puppet/modules').with(:ensure => 'absent') }
+    it { should contain_file('/etc/puppetlabs/code/environments') }
   end
 
   describe 'set version' do

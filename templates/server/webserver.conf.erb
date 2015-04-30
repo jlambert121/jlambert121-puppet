@@ -1,6 +1,7 @@
 # Manged by puppet - do not modify
 
 webserver: {
+    access-log-config = /etc/puppetlabs/puppetserver/request-logging.xml
     client-auth = want
     ssl-host = 0.0.0.0
     ssl-port = 8140

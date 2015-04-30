@@ -9,7 +9,7 @@ describe 'puppet::server classes' do
       EOS
 
       # Ensure puppet ssl dir is clean
-      shell("rm -rf /var/lib/puppet/ssl")
+      shell("rm -rf /etc/puppetlabs/puppet/ssl")
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)

@@ -13,11 +13,11 @@ describe 'puppet::agent classes' do
       apply_manifest(pp, :catch_changes  => true)
     end
 
-    describe package('puppet') do
+    describe package('puppet-agent') do
       it { is_expected.to be_installed }
     end
 
-    describe file('/etc/puppet/puppet.conf') do
+    describe file('/etc/puppetlabs/puppet/puppet.conf') do
       it { is_expected.to be_file }
     end
 
@@ -40,7 +40,7 @@ describe 'puppet::agent classes' do
     end
 
     describe cron do
-      it { should have_entry '/usr/bin/env puppet agent --onetime --no-daemonize' }
+      it { should have_entry '3,33 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
     end
   end # cron runmode
 
@@ -61,7 +61,7 @@ describe 'puppet::agent classes' do
     end
 
     describe cron do
-      it { should_not have_entry '/usr/bin/env puppet agent --onetime --no-daemonize' }
+      it { should_not have_entry '3,33 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
     end
 
   end # service runmode
@@ -83,7 +83,7 @@ describe 'puppet::agent classes' do
     end
 
     describe cron do
-      it { should_not have_entry '/usr/bin/env puppet agent --onetime --no-daemonize' }
+      it { should_not have_entry '3,33 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
     end
 
   end # none runmode
