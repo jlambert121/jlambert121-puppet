@@ -19,7 +19,7 @@ class puppet::params {
   $server_ca_enabled = true
   $server_certname = undef
   $server_java_opts = '-Xms2g -Xmx2g -XX:MaxPermSize=256m'
-  $server_log_dir = '/var/log/puppetserver'
+  $server_log_dir = '/var/log/puppetlabs/puppetserver'
   $server_log_file = 'puppetserver.log'
   $server_reports = undef
   $server_version = 'latest'
