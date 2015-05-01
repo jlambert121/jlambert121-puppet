@@ -23,6 +23,7 @@ class puppet::params {
   $server_log_file = 'puppetserver.log'
   $server_reports = undef
   $server_version = 'latest'
+  $firewall = false
 
   case $::osfamily {
     'Debian': {
