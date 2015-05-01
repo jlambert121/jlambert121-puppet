@@ -25,6 +25,7 @@ class puppet (
   String                                       $server_log_file   = $::puppet::params::server_log_file,
   Optional[Array[String]]                      $server_reports    = $::puppet::params::server_reports,
   String                                       $server_version    = $::puppet::params::server_version,
+  Boolean                                      $firewall          = $::puppet::params::firewall,
 ) inherits puppet::params {
 
 

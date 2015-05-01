@@ -13,6 +13,7 @@ class puppet::server::config (
   $puppetdb_port   = $::puppet::puppetdb_port,
   $puppetdb_server = $::puppet::puppetdb_server,
   $reports         = $::puppet::server_reports,
+  $firewall        = $::puppet::firewall,
 ) {
 
   $file_ensure = $server ? {
@@ -115,6 +116,15 @@ class puppet::server::config (
     # - $puppetdb_server
     file { '/etc/puppetlabs/puppet/puppetdb.conf':
       content => template('puppet/server/puppetdb.conf.erb'),
+    }
+  }
+
+  if $firewall {
+    # Allow inbound connections
+    firewall { '500 allow inbound connections to puppetserver':
+      action => 'accept',
+      state  => 'NEW',
+      dport  => '8140',
     }
   }
 }
