@@ -1,3 +1,6 @@
+20150501 - v0.3.1
+  Fix for puppetserver.conf paths
+  Add support for puppetlabs firewall module
 20150430 - v0.3.0
   Requires puppet-agent 1.0/puppetserver 2.0
 20150105 - v0.2.0
