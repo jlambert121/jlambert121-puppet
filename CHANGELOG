@@ -1,3 +1,4 @@
+  Fix undefined variable in fileserver template
 20150501 - v0.3.1
   Fix for puppetserver.conf paths
   Add support for puppetlabs firewall module
