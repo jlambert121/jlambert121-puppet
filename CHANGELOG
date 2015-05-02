@@ -1,3 +1,4 @@
+20150501 - v0.3.2
   Fix undefined variable in fileserver template
 20150501 - v0.3.1
   Fix for puppetserver.conf paths
