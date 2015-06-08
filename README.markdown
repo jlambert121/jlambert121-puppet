@@ -214,9 +214,9 @@ This module is acceptance tested on CentOS 6.5, CentOS 7.0, Ubuntu 12.04, and Ub
 
 ## TODO
 
-[ ] Add /opt/puppetlabs/bin to PATH
-[ ] Support setting [environment_timeout](http://docs.puppetlabs.com/puppet/latest/reference/environments_configuring.html#environmenttimeout)
-[ ] Support configuring [autosign](http://docs.puppetlabs.com/puppet/latest/reference/ssl_autosign.html)
+- [ ] Add /opt/puppetlabs/bin to PATH
+- [ ] Support setting [environment_timeout](http://docs.puppetlabs.com/puppet/latest/reference/environments_configuring.html#environmenttimeout)
+- [ ] Support configuring [autosign](http://docs.puppetlabs.com/puppet/latest/reference/ssl_autosign.html)
 
 ## Development
 
