@@ -6,7 +6,7 @@ class puppet::params {
   $use_srv_records = false
   $srv_domain = undef
   $runmode = 'cron'
-  $environment = 'production'
+  $environment = undef
   $puppetmaster = "puppet.${::domain}"
 
   $dns_alt_names = undef
@@ -33,7 +33,7 @@ class puppet::params {
       $server_config_dir = '/etc/sysconfig'
     }
     default: {
-      fail("${::osfaily} is not supported.")
+      fail("${::osfamily} is not supported.")
     }
   }
 }

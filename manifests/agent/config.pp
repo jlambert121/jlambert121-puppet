@@ -6,6 +6,12 @@ class puppet::agent::config (
   $puppetmaster    = $::puppet::puppetmaster,
 ) {
 
+  if $environment {
+    $_environment = $environment
+  } else {
+    $_environment = $::environment
+  }
+
   concat::fragment { 'puppet_agent':
     target  => '/etc/puppetlabs/puppet/puppet.conf',
     content => template("${module_name}/puppet.agent.erb"),

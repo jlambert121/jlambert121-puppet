@@ -1,6 +1,6 @@
 
 [agent]
-    environment       = <%= @environment %>
+  environment       = <%= @_environment %>
 <% if !@use_srv_records -%>
-    server            = <%= if ( @puppetmaster and !@puppetmaster.empty? ) then @puppetmaster else @fqdn end %>
+  server            = <%= if ( @puppetmaster and !@puppetmaster.empty? ) then @puppetmaster else @fqdn end %>
 <% end -%>
