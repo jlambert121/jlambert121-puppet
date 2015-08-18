@@ -7,7 +7,7 @@ class puppet (
   Boolean                                      $use_srv_records   = $::puppet::params::use_srv_records,
   Optional[String]                             $srv_domain        = $::puppet::params::srv_domain,
   Enum['cron', 'service', 'none']              $runmode           = $::puppet::params::runmode,
-  String                                       $environment       = $::puppet::params::environment,
+  Optional[String]                             $environment       = $::puppet::params::environment,
   String                                       $puppetmaster      = $::puppet::params::puppetmaster,
 
   # Server
