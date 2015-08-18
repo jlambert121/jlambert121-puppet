@@ -1,10 +1,10 @@
 {
   "name": "evenup-puppet",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "author": "Justin Lambert",
   "summary": "Module to manage puppet, puppet-server",
   "license": "Apache-2.0",
-  "source": "https://github.com/evenup/puppet-puppet",
+  "source": "https://github.com/evenup/evenup-puppet",
   "project_page": "https://github.com/evenup/evenup-puppet",
   "issues_url": "https://github.com/evenup/evenup-puppet/issues",
   "tags": ["puppet", "puppetserver"],
