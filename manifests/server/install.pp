@@ -24,7 +24,7 @@ class puppet::server::install (
     ensure => $_server_version,
   }
 
-  package { 'puppetdb-terminus':
+  package { 'puppetdb-termini':
     ensure => $_puppetdb_version,
   }
 
