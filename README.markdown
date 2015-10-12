@@ -129,7 +129,7 @@ String.  Source for hiera.yaml to install.  Will enable hiera lookups on the ser
 Default: undef
 
 #####`server_puppetdb`
-Boolean.  Whether or not puppetdb terminus and route configuration should be installed
+Boolean.  Whether or not puppetdb termini and route configuration should be installed
 
 Default: false
 
@@ -144,7 +144,7 @@ String.  Hostname where puppetdb is running.  Required if puppetdb => true
 Default: undef
 
 #####`server_puppetdb_version`
-String.  Version of puppetdb-terminus to install.
+String.  Version of puppetdb-termini to install.
 
 Default: latest
 

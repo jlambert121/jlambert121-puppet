@@ -17,23 +17,23 @@ describe 'puppet::server::install', :type => :class do
   describe 'server == false' do
     let(:pre_condition) { 'class {"::puppet": server => false }' }
     it { should contain_package('puppetserver').with(:ensure => 'absent') }
-    it { should contain_package('puppetdb-terminus').with(:ensure => 'absent') }
+    it { should contain_package('puppetdb-termini').with(:ensure => 'absent') }
   end
 
   describe 'puppetdb' do
     context 'default' do
       let(:pre_condition) { 'class {"::puppet": server => true}' }
-      it { should contain_package('puppetdb-terminus').with(:ensure => 'absent') }
+      it { should contain_package('puppetdb-termini').with(:ensure => 'absent') }
     end
 
     context 'installed' do
       let(:pre_condition) { 'class {"::puppet": server => true, puppetdb => true, puppetdb_server => "db.example.com"}' }
-      it { should contain_package('puppetdb-terminus').with(:ensure => 'latest') }
+      it { should contain_package('puppetdb-termini').with(:ensure => 'latest') }
     end
 
     context 'with version' do
       let(:pre_condition) { 'class {"::puppet": server => true, puppetdb => true, puppetdb_server => "db.example.com", puppetdb_version => "2.2.3"}' }
-      it { should contain_package('puppetdb-terminus').with(:ensure => '2.2.3') }
+      it { should contain_package('puppetdb-termini').with(:ensure => '2.2.3') }
     end
   end
 
