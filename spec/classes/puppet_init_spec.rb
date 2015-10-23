@@ -34,7 +34,7 @@ describe 'puppet', :type => :class do
 
     context 'bad hiera_source' do
       let(:params) { { :hiera_source => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/must be a puppet resource/) }
+      it { expect { should create_class('puppet') }.to raise_error(/to have type Optional\[Pattern/) }
     end
 
     context 'bad puppetdb_port' do
