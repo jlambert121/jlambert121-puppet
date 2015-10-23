@@ -1,3 +1,7 @@
+20151023 - v0.5.0
+  Update config templates to puppet agent 4.2, puppet-server 2.1 <jbehrends>
+  Add regex for hiera source matching <roidlapluie>
+  Bump puppet requirement to 4.2
 20150818 - v0.4.0
   Running agent with -e keeps environment unless passed as class param
 20150501 - v0.3.2
