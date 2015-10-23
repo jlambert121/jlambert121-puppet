@@ -13,7 +13,7 @@ class puppet (
   # Server
   Optional[Array[String]]                      $dns_alt_names     = $::puppet::params::dns_alt_names,
   Optional[Hash[String, Hash[String, String]]] $fileserver_conf   = $::puppet::params::fileserver_conf,
-  Optional[String]                             $hiera_source      = $::puppet::params::hiera_source,
+  Optional[Pattern[/\Apuppet/]]                $hiera_source      = $::puppet::params::hiera_source,
   Boolean                                      $puppetdb          = $::puppet::params::puppetdb,
   Integer                                      $puppetdb_port     = $::puppet::params::puppetdb_port,
   Optional[String]                             $puppetdb_server   = $::puppet::params::puppetdb_server,
@@ -27,11 +27,6 @@ class puppet (
   String                                       $server_version    = $::puppet::params::server_version,
   Boolean                                      $firewall          = $::puppet::params::firewall,
 ) inherits puppet::params {
-
-
-  if $hiera_source {
-    validate_re($hiera_source, '^puppet', 'Puppet: hiera_source must be a puppet resource')
-  }
 
   if $puppetdb and !$puppetdb_server {
     fail('Puppet: puppetdb_server is required with puppetdb')

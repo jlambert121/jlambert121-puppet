@@ -5,7 +5,7 @@ group :unit_tests do
   gem 'rspec', '~> 3.1.0',                                 :require => false
   gem 'rspec-puppet',                                      :require => false
   gem 'puppetlabs_spec_helper',                            :require => false
-  gem 'puppet-lint', '1.0.1',                              :require => false
+  gem 'puppet-lint',                                       :require => false
   gem 'puppet-syntax',                                     :require => false
   gem 'metadata-json-lint',                                :require => false
   gem 'json',                                              :require => false
