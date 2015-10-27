@@ -26,7 +26,7 @@ jruby-puppet: {
     master-log-dir: /var/log/puppetlabs/puppetserver
 
     # (optional) maximum number of JRuby instances to allow
-    # max-active-instances: 1
+    max-active-instances: <%= if @jruby_instances > 0 then @jruby_instances else 1 end %>
 }
 
 # settings related to HTTP client requests made by Puppet Server

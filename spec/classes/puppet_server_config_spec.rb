@@ -44,7 +44,7 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_file('/etc/puppetlabs/puppetserver/request-logging.xml') }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/ca.conf') }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/global.conf') }
-      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/puppetserver.conf') }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/puppetserver.conf').with( :content => /max-active-instances: 3/ ) }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf') }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf') }
       it { should contain_file('/etc/puppetlabs/code/hiera.yaml').with(:ensure => 'absent') }

@@ -128,6 +128,13 @@ String.  Source for hiera.yaml to install.  Will enable hiera lookups on the ser
 
 Default: undef
 
+#####`jruby_instances`
+Integer.  Number of JRuby instances to start up inside the puppetserver JVM
+
+Default: $::processors[count]-1
+
+Note: if this value is not >= 1, then this is defaulted to 1.
+
 #####`server_puppetdb`
 Boolean.  Whether or not puppetdb termini and route configuration should be installed
 
