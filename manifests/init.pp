@@ -26,6 +26,7 @@ class puppet (
   Optional[Array[String]]                      $server_reports    = $::puppet::params::server_reports,
   String                                       $server_version    = $::puppet::params::server_version,
   Boolean                                      $firewall          = $::puppet::params::firewall,
+  Integer                                      $jruby_instances   = $::puppet::params::jruby_instances,
 ) inherits puppet::params {
 
   if $puppetdb and !$puppetdb_server {

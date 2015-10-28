@@ -14,6 +14,7 @@ class puppet::server::config (
   $puppetdb_server = $::puppet::puppetdb_server,
   $reports         = $::puppet::server_reports,
   $firewall        = $::puppet::firewall,
+  $jruby_instances = $::puppet::jruby_instances,
 ) {
 
   $file_ensure = $server ? {
