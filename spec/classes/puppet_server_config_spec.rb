@@ -35,7 +35,7 @@ describe 'puppet::server::config', :type => :class do
 
       it { should contain_file('/var/log/puppetlabs/puppetserver').with(:ensure => 'directory') }
       it { should contain_concat__fragment('puppet_master').with(:content => /ca = true/) }
-      it { should_not contain_concat__fragment('puppet_master').with(:content => /reports/) }
+      it { should contain_concat__fragment('puppet_master').with(:content => /reports = none/) }
       it { should_not contain_concat__fragment('puppet_master').with( :content => /dns_alt_names/ ) }
       it { should_not contain_concat__fragment('puppet_master').with(:content => /storeconfigs/) }
       it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }

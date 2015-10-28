@@ -183,7 +183,7 @@ Default:  puppetserver.log
 #####`server_reports`
 Array[String].  List of reports to enable
 
-Default: undef
+Default: ['none']
 
 #####`server_version`
 String.  Version of puppetserver to install.
