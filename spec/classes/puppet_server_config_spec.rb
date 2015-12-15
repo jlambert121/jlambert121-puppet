@@ -79,6 +79,11 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_file('/etc/puppetlabs/code/hiera.yaml').with(:source => 'puppet:///data/hiera.yaml') }
     end
 
+    context 'not managing hiera' do
+      let(:pre_condition) { 'class { "puppet": server => true, manage_hiera => false }' }
+      it { should_not contain_file('/etc/puppetlabs/code/hiera.yaml') }
+    end
+
     context 'with puppetdb' do
       let(:pre_condition) { 'class { "puppet": server => true, puppetdb => true, puppetdb_server => "db.example.com" }'}
       it { should contain_file('/etc/puppetlabs/puppet/routes.yaml') }

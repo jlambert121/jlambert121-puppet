@@ -14,32 +14,32 @@ describe 'puppet', :type => :class do
   describe 'error handling' do
     context 'bad use_srv_records' do
       let(:params) { { :use_srv_records => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/to have type Boolean/) }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a Boolean value/) }
     end
 
     context 'bad puppetdb' do
       let(:params) { { :puppetdb => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/to have type Boolean/) }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a Boolean value/) }
     end
 
     context 'bad server_ca_enabled' do
       let(:params) { { :server_ca_enabled => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/to have type Boolean/) }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a Boolean value/) }
     end
 
     context 'bad runmode' do
       let(:params) { { :runmode => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/to have type Enum\['cron', 'service', 'none'\]/) }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a match for Enum/) }
     end
 
     context 'bad hiera_source' do
       let(:params) { { :hiera_source => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/to have type Optional\[Pattern/) }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a match for Pattern/) }
     end
 
     context 'bad puppetdb_port' do
       let(:params) { { :puppetdb_port => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/to have type Integer/) }
+      it { expect { should create_class('puppet') }.to raise_error(/expects an Integer value/) }
     end
 
     context 'puppetdb, no server' do
@@ -49,7 +49,7 @@ describe 'puppet', :type => :class do
 
     context 'bad fileserver_conf' do
       let(:params) { { :fileserver_conf => 'breakme' } }
-      it { expect { should create_class('puppet') }.to raise_error(/to have type Optional\[Hash\[String/) }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a Hash value/) }
     end
 
   end

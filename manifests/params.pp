@@ -11,6 +11,7 @@ class puppet::params {
 
   $dns_alt_names = undef
   $fileserver_conf = undef
+  $manage_hiera = true
   $hiera_source = undef
   $puppetdb = false
   $puppetdb_port = 8081
