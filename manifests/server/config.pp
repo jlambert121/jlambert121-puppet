@@ -10,6 +10,7 @@ class puppet::server::config (
   $log_dir         = $::puppet::server_log_dir,
   $log_file        = $::puppet::server_log_file,
   $server          = $::puppet::server,
+  $runinterval     = $::puppet::runinterval,
   $puppetdb        = $::puppet::puppetdb,
   $puppetdb_port   = $::puppet::puppetdb_port,
   $puppetdb_server = $::puppet::puppetdb_server,
@@ -32,6 +33,7 @@ class puppet::server::config (
   if $server {
     file { $log_dir:
       ensure => 'directory',
+      mode   => '0750',
     }
 
     # Template uses

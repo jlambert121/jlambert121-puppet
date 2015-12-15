@@ -4,6 +4,7 @@ class puppet::agent::config (
   $environment     = $::puppet::environment,
   $use_srv_records = $::puppet::use_srv_records,
   $puppetmaster    = $::puppet::puppetmaster,
+  $runinterval     = $::puppet::runinterval,
 ) {
 
   if $environment {

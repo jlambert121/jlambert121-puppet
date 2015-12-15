@@ -7,12 +7,18 @@ describe 'puppet::agent::config', :type => :class do
     let(:pre_condition) { 'include puppet' }
     it { should create_class('puppet::agent::config') }
     it { should contain_concat__fragment('puppet_agent').with(:content => /environment\s+=\s+rp_env/) }
+    it { should contain_concat__fragment('puppet_agent').with(:content => /runinterval\s+=\s+30m/) }
     it { should contain_concat__fragment('puppet_agent').with(:content => /server\s+=\s+puppet\.example\.com/) }
   end
 
   describe 'set environment' do
     let(:pre_condition) { 'class{"::puppet": environment => "dev"}' }
     it { should contain_concat__fragment('puppet_agent').with(:content => /environment\s+=\s+dev/) }
+  end
+
+  describe 'set runinterval' do
+    let(:pre_condition) { 'class{"::puppet": runinterval => "60m"}' }
+    it { should contain_concat__fragment('puppet_agent').with(:content => /runinterval\s+=\s+60m/) }
   end
 
   describe 'set puppetmaster' do
