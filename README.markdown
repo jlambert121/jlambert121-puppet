@@ -123,6 +123,11 @@ The format of this value is:
     }
 ```
 
+##### `manage_hiera`
+Boolean.  Whether or not this module should manage the hiera.yaml file
+
+Default: true
+
 #####`hiera_source`
 String.  Source for hiera.yaml to install.  Will enable hiera lookups on the server
 

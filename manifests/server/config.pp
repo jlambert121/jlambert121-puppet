@@ -4,6 +4,7 @@ class puppet::server::config (
   $config_dir      = $::puppet::params::server_config_dir,
   $dns_alt_names   = $::puppet::dns_alt_names,
   $fileserver      = $::puppet::fileserver_conf,
+  $manage_hiera    = $::puppet::manage_hiera,
   $hiera_source    = $::puppet::hiera_source,
   $java_opts       = $::puppet::server_java_opts,
   $log_dir         = $::puppet::server_log_dir,
@@ -36,7 +37,6 @@ class puppet::server::config (
     # Template uses
     # - $ca_enabled
     # - $dns_alt_names
-    # - $hiera_source
     # - $puppetdb
     # - $reports
     concat::fragment { 'puppet_master':
@@ -89,11 +89,11 @@ class puppet::server::config (
     content => template("${module_name}/server/webserver.conf.erb"),
   }
 
-  if ( $server and $hiera_source ) {
+  if ( $server and $hiera_source and $manage_hiera) {
     file { '/etc/puppetlabs/code/hiera.yaml':
       source => $hiera_source,
     }
-  } else {
+  } elsif $manage_hiera {
     file { '/etc/puppetlabs/code/hiera.yaml':
       ensure => 'absent',
     }
