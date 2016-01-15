@@ -17,6 +17,7 @@ class puppet::params {
   $puppetdb_port = 8081
   $puppetdb_server = undef
   $puppetdb_version = 'latest'
+  $runinterval = '30m'
   $server_ca_enabled = true
   $server_certname = undef
   $server_java_opts = '-Xms2g -Xmx2g -XX:MaxPermSize=256m'
