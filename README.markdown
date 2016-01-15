@@ -140,22 +140,22 @@ Default: $::processors[count]-1
 
 Note: if this value is not >= 1, then this is defaulted to 1.
 
-#####`server_puppetdb`
+#####`puppetdb`
 Boolean.  Whether or not puppetdb termini and route configuration should be installed
 
 Default: false
 
-#####`server_puppetdb_port`
+#####`puppetdb_port`
 Integer.  Port puppetdb is listening on.
 
 Default: 8081
 
-#####`server_puppetdb_server`
+#####`puppetdb_server`
 String.  Hostname where puppetdb is running.  Required if puppetdb => true
 
 Default: undef
 
-#####`server_puppetdb_version`
+#####`puppetdb_version`
 String.  Version of puppetdb-termini to install.
 
 Default: latest

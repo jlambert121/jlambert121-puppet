@@ -17,13 +17,13 @@ describe 'puppet::server::install', :type => :class do
   describe 'server == false' do
     let(:pre_condition) { 'class {"::puppet": server => false }' }
     it { should contain_package('puppetserver').with(:ensure => 'absent') }
-    it { should contain_package('puppetdb-termini').with(:ensure => 'absent') }
+    it { should_not contain_package('puppetdb-termini') }
   end
 
   describe 'puppetdb' do
     context 'default' do
       let(:pre_condition) { 'class {"::puppet": server => true}' }
-      it { should contain_package('puppetdb-termini').with(:ensure => 'absent') }
+      it { should_not contain_package('puppetdb-termini') }
     end
 
     context 'installed' do
