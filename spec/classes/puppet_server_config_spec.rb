@@ -92,6 +92,13 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_concat__fragment('puppet_master').with(:content => /storeconfigs/) }
     end
 
+    context 'with puppetdb but without managed puppetdb' do
+      let(:pre_condition) { 'class { "puppet": server => true, puppetdb => true, puppetdb_server => "db.example.com", manage_puppetdb => false}'}
+      it { should_not contain_file('/etc/puppetlabs/puppet/routes.yaml') }
+      it { should_not contain_file('/etc/puppetlabs/puppet/puppetdb.conf').with(:content => /db\.example\.com/) }
+      it { should contain_concat__fragment('puppet_master').with(:content => /storeconfigs/) }
+    end
+
     context 'with reports' do
       let(:pre_condition) { 'class { "puppet": server => true, server_reports => ["puppetdb", "hipchat"] }'}
       it { should contain_concat__fragment('puppet_master').with(:content => /reports = puppetdb, hipchat/) }

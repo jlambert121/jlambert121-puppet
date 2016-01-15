@@ -37,7 +37,7 @@ describe 'puppet::server::install', :type => :class do
     end
 
     context 'without termini' do
-      let(:pre_condition) { 'class {"::puppet": server => true, puppetdb => true, puppetdb_server => "db.example.com", puppetdb_version => "2.2.3", manage_termini => false}' }
+      let(:pre_condition) { 'class {"::puppet": server => true, puppetdb => true, puppetdb_server => "db.example.com", puppetdb_version => "2.2.3", manage_puppetdb => false}' }
       it { should_not contain_package('puppetdb-termini') }
     end
   end

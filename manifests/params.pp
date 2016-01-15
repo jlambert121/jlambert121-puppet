@@ -17,7 +17,7 @@ class puppet::params {
   $puppetdb_port = 8081
   $puppetdb_server = undef
   $puppetdb_version = 'latest'
-  $manage_termini = true
+  $manage_puppetdb = true
   $runinterval = '30m'
   $server_ca_enabled = true
   $server_certname = undef
