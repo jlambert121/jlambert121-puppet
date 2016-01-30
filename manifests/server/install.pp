@@ -2,6 +2,7 @@
 class puppet::server::install (
   $puppetdb         = $::puppet::puppetdb,
   $puppetdb_version = $::puppet::puppetdb_version,
+  $manage_puppetdb  = $::puppet::manage_puppetdb,
   $server           = $::puppet::server,
   $server_version   = $::puppet::server_version,
 ) {
@@ -24,7 +25,7 @@ class puppet::server::install (
     ensure => $_server_version,
   }
 
-  if $puppetdb {
+  if ($server and $puppetdb and $manage_puppetdb) {
     package { 'puppetdb-termini':
       ensure => $_puppetdb_version,
     }

@@ -14,6 +14,7 @@ class puppet::server::config (
   $puppetdb        = $::puppet::puppetdb,
   $puppetdb_port   = $::puppet::puppetdb_port,
   $puppetdb_server = $::puppet::puppetdb_server,
+  $manage_puppetdb = $::puppet::manage_puppetdb,
   $reports         = $::puppet::server_reports,
   $firewall        = $::puppet::firewall,
   $jruby_instances = $::puppet::jruby_instances,
@@ -109,7 +110,7 @@ class puppet::server::config (
     }
   }
 
-  if ( $server and $puppetdb) {
+  if ( $server and $puppetdb and $manage_puppetdb) {
     file { '/etc/puppetlabs/puppet/routes.yaml':
       source => 'puppet:///modules/puppet/routes.yaml',
     }
