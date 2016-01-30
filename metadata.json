@@ -1,12 +1,12 @@
 {
-  "name": "evenup-puppet",
-  "version": "0.6.0",
+  "name": "jlambert121-puppet",
+  "version": "0.7.0",
   "author": "Justin Lambert",
   "summary": "Module to manage puppet, puppet-server",
   "license": "Apache-2.0",
-  "source": "https://github.com/evenup/evenup-puppet",
-  "project_page": "https://github.com/evenup/evenup-puppet",
-  "issues_url": "https://github.com/evenup/evenup-puppet/issues",
+  "source": "https://github.com/jlambert121/jlambert121-puppet",
+  "project_page": "https://github.com/jlambert121/jlambert121-puppet",
+  "issues_url": "https://github.com/jlambert121/jlambert121-puppet/issues",
   "tags": ["puppet", "puppetserver"],
   "operatingsystem_support": [
     {

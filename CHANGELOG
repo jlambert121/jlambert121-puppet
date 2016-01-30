@@ -1,3 +1,7 @@
+20160130 - v0.7.0
+  Rename from evenup-puppet to jlambert121-puppet
+  Add agent runinterval <Greig McGill>
+  Add manage_puppetdb parameter <Rob Nelson>
 20151215 - v0.6.0
   Add authorization to server bootstrap
   Provide ability to not manage hiera.yaml

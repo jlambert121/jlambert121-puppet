@@ -38,7 +38,7 @@ Currently acceptance tests are a bit wonky due to beaker's inability to handle p
 This module can be installed with
 
 ```
-  puppet module install evenup-puppet
+  puppet module install jlambert121-puppet
 ```
 
 ## Usage
@@ -140,22 +140,22 @@ Default: $::processors[count]-1
 
 Note: if this value is not >= 1, then this is defaulted to 1.
 
-#####`puppetdb`
+#####`server_puppetdb`
 Boolean.  Whether or not puppetdb termini and route configuration should be installed
 
 Default: false
 
-#####`puppetdb_port`
+#####`server_puppetdb_port`
 Integer.  Port puppetdb is listening on.
 
 Default: 8081
 
-#####`puppetdb_server`
+#####`server_puppetdb_server`
 String.  Hostname where puppetdb is running.  Required if puppetdb => true
 
 Default: undef
 
-#####`puppetdb_version`
+#####`server_puppetdb_version`
 String.  Version of puppetdb-termini to install.
 
 Default: latest
@@ -232,11 +232,11 @@ This module is acceptance tested on CentOS 6.5, CentOS 7.0, Ubuntu 12.04, and Ub
 
 ## Development
 
-Improvements and bug fixes are greatly appreciated.  See the [contributing guide](https://github.com/evenup/evenup-puppet/CONTRIBUTING.md) for
+Improvements and bug fixes are greatly appreciated.  See the [contributing guide](https://github.com/jlambert121/jlambert121-puppet/CONTRIBUTING.md) for
 information on adding and validating tests for PRs.
 
 ## Changelog / Contributors
 
-[Changelog](https://github.com/evenup/evenup-puppet/blob/master/CHANGELOG)
+[Changelog](https://github.com/jlambert121/jlambert121-puppet/blob/master/CHANGELOG)
 
-[Contributors](https://github.com/evenup/evenup-puppet/graphs/contributors)
+[Contributors](https://github.com/jlambert121/jlambert121-puppet/graphs/contributors)
