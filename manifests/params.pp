@@ -28,7 +28,7 @@ class puppet::params {
   $server_version = 'latest'
   $firewall = false
   $jruby_instances = $::processors[count]-1
-  $use_legacy_auth = true
+  $use_legacy_auth = false
 
   case $::osfamily {
     'Debian': {
