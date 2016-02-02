@@ -80,7 +80,7 @@ Default: undef
 #####`use_srv_records`
 Boolean.  Whether or not to use DNS SRV records
 
-Defaul: false
+Default: false
 
 #####`srv_domain`
 String.  Domain to use for DNS SRV records
@@ -91,6 +91,11 @@ Default: undef
 Enum['cron', 'service', 'none'].  How the puppet agent runs should be scheduled.
 
 Default: cron
+
+#####`runinterval`
+String.  Frequency of agent checkins if runmode is 'service'. No effect otherwise.
+
+Default: 30m
 
 #####`environment`
 String.  Environment for this agent
@@ -194,6 +199,11 @@ Default: undef
 String.  Version of puppetserver to install.
 
 Default: latest
+
+#####`use_legacy_auth`
+Boolean.  Whether to use the deprecated /etc/puppetlabs/puppet/auth.conf (true) or the new /etc/puppetlabs/puppetserver/conf.d/auth.conf (false).
+
+Default: false
 
 
 ## Reference
