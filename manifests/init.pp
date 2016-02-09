@@ -30,6 +30,7 @@ class puppet (
   String                                       $server_version    = $::puppet::params::server_version,
   Boolean                                      $firewall          = $::puppet::params::firewall,
   Integer                                      $jruby_instances   = $::puppet::params::jruby_instances,
+  Boolean                                      $use_legacy_auth   = $::puppet::params::use_legacy_auth,
 ) inherits puppet::params {
 
   if $puppetdb and !$puppetdb_server {

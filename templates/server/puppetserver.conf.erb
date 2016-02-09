@@ -27,6 +27,9 @@ jruby-puppet: {
 
     # (optional) maximum number of JRuby instances to allow
     max-active-instances: <%= if @jruby_instances > 0 then @jruby_instances else 1 end %>
+
+    # specified in the Puppet Server HOCON-formatted auth.conf (if false).
+    use-legacy-auth-conf: <%= if @use_legacy_auth then 'true' else 'false' end %>
 }
 
 # settings related to HTTP client requests made by Puppet Server
