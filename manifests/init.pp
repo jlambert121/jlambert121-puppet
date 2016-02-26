@@ -47,6 +47,10 @@ class puppet (
     $ensure = 'absent'
   }
 
+  if ($server and $runmode == 'service') {
+    Service['puppetserver'] -> Service['puppet']
+  }
+
   class { '::puppet::common': }
 
   class { '::puppet::server':
