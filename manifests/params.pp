@@ -6,7 +6,7 @@ class puppet::params {
   $use_srv_records = false
   $srv_domain = undef
   $runmode = 'cron'
-  $environment = undef
+  $_environment = undef
   $puppetmaster = "puppet.${::domain}"
 
   $dns_alt_names = undef
