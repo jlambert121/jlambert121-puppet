@@ -12,3 +12,6 @@
 <% if @certname -%>
   certname = <%= @certname %>
 <% end -%>
+<% if @dns_alt_names && @dns_alt_names.length > 0-%>
+  dns_alt_names = <%= @dns_alt_names.join(', ') %>
+<% end -%>
