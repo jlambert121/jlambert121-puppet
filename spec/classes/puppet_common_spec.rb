@@ -36,4 +36,9 @@ describe 'puppet::common', :type => :class do
     it { should contain_concat__fragment('puppet_main').with(:content => /certname/) }
   end
 
+  context 'with dns_alt_names' do
+    let(:pre_condition) { 'class { "puppet": server => true, dns_alt_names => ["puppet.example.com"] }'}
+    it { should contain_concat__fragment('puppet_main').with(:content => /dns_alt_names = puppet.example.com/) }
+  end
+
 end

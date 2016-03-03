@@ -2,7 +2,6 @@
 class puppet::server::config (
   $ca_enabled      = $::puppet::server_ca_enabled,
   $config_dir      = $::puppet::params::server_config_dir,
-  $dns_alt_names   = $::puppet::dns_alt_names,
   $fileserver      = $::puppet::fileserver_conf,
   $manage_hiera    = $::puppet::manage_hiera,
   $hiera_source    = $::puppet::hiera_source,
@@ -40,7 +39,6 @@ class puppet::server::config (
 
     # Template uses
     # - $ca_enabled
-    # - $dns_alt_names
     # - $puppetdb
     # - $reports
     concat::fragment { 'puppet_master':

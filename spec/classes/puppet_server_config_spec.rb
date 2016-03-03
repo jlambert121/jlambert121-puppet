@@ -105,11 +105,6 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_concat__fragment('puppet_master').with(:content => /reports = puppetdb, hipchat/) }
     end
 
-    context 'with dns_alt_names' do
-      let(:pre_condition) { 'class { "puppet": server => true, dns_alt_names => ["puppet.example.com"] }'}
-      it { should contain_concat__fragment('puppet_master').with(:content => /dns_alt_names = puppet.example.com/) }
-    end
-
     context 'with firewall' do
       let(:pre_condition) { 'class { "puppet": server => true, firewall => true }' }
       it { should contain_firewall('500 allow inbound connections to puppetserver') }
