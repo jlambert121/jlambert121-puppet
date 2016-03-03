@@ -69,6 +69,16 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_file('/etc/sysconfig/puppetserver').with(:content => /JAVA_ARGS="blah"/) }
     end
 
+    context 'set autosign list' do
+      let(:pre_condition) { 'class { "puppet": server => true, autosign_list => [ "blah", "blah2" ] }'}
+      it { should contain_file('/etc/puppetlabs/puppet/autosign.conf').with(:content => /blah\\nblah2/, :mode => '0440') }
+    end
+
+    context 'set autosign script' do
+      let(:pre_condition) { 'class { "puppet": server => true, autosign_runnable => true, autosign_script => "/bin/false" }'}
+      it { should contain_file('/etc/puppetlabs/puppet/autosign.conf').with(:content => "/bin/false", :mode => '0550') }
+    end
+
     context 'set disable ca' do
       let(:pre_condition) { 'class { "puppet": server => true, server_ca_enabled => false }'}
       it { should_not contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }

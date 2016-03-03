@@ -11,6 +11,10 @@ class puppet (
   String                                       $puppetmaster      = $::puppet::params::puppetmaster,
 
   # Server
+  String                                       $autosign          = $::puppet::params::autosign,
+  Boolean                                      $autosign_runnable = $::puppet::params::autosign_runnable,
+  Optional[Array[String]]                      $autosign_list     = $::puppet::params::autosign_list,
+  Optional[String]                             $autosign_script   = $::puppet::params::autosign_script,
   Optional[Array[String]]                      $dns_alt_names     = $::puppet::params::dns_alt_names,
   Optional[Hash[String, Hash[String, String]]] $fileserver_conf   = $::puppet::params::fileserver_conf,
   Boolean                                      $manage_hiera      = $::puppet::params::manage_hiera,
@@ -39,6 +43,14 @@ class puppet (
 
   if $fileserver_conf and !is_hash($fileserver_conf) {
     fail('Puppet: fileserver_conf must be a of hash of mountpoints')
+  }
+
+  if $autosign_runnable == true and $autosign_script == '' {
+    fail('Puppet: autosign_runnable requires autosign_script')
+  }
+
+  if is_array($autosign_list) and !empty($autosign_list) and $autosign_script != '' {
+    fail('Puppet: autosign_list and autosign_script can not both be specified')
   }
 
   if ( $agent or $server ) {

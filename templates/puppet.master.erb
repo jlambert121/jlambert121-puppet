@@ -6,6 +6,7 @@
   codedir = /etc/puppetlabs/code
 
   always_cache_features = true
+  autosign = <%= @autosign %>
   ca = <%= @ca_enabled %>
 <% if @dns_alt_names && @dns_alt_names.length > 0-%>
   dns_alt_names = <%= @dns_alt_names.join(', ') %>
