@@ -5,4 +5,19 @@ webserver: {
     client-auth = want
     ssl-host = 0.0.0.0
     ssl-port = 8140
+    <% if @server_ssl_cert -%>
+    ssl-cert = <%= @server_ssl_cert %>
+    <% end -%>
+    <% if @server_ssl_key -%>
+    ssl-key = <%= @server_ssl_key %>
+    <% end -%>
+    <% if @server_ssl_ca_cert -%>
+    ssl-ca-cert = <%= @server_ssl_ca_cert %>
+    <% end -%>
+    <% if @server_ssl_cert_chain -%>
+    ssl-cert-chain = <%= @server_ssl_cert_chain %>
+    <% end -%>
+    <% if @server_ssl_crl_path -%>
+    ssl-crl-path = <%= @server_ssl_crl_path %>
+    <% end -%>
 }
