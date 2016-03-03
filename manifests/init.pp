@@ -31,11 +31,11 @@ class puppet (
   Boolean                                      $firewall              = $::puppet::params::firewall,
   Integer                                      $jruby_instances       = $::puppet::params::jruby_instances,
   Boolean                                      $use_legacy_auth       = $::puppet::params::use_legacy_auth,
-  String                                       $server_ssl_cert       = $::puppet::params::server_ssl_cert,
-  String                                       $server_ssl_key        = $::puppet::params::server_ssl_key,
-  String                                       $server_ssl_ca_cert    = $::puppet::params::server_ssl_ca_cert,
-  String                                       $server_ssl_cert_chain = $::puppet::params::server_ssl_cert_chain,
-  String                                       $server_ssl_crl_path   = $::puppet::params::server_ssl_crl_path,
+  Optional[String]                             $server_ssl_cert       = $::puppet::params::server_ssl_cert,
+  Optional[String]                             $server_ssl_key        = $::puppet::params::server_ssl_key,
+  Optional[String]                             $server_ssl_ca_cert    = $::puppet::params::server_ssl_ca_cert,
+  Optional[String]                             $server_ssl_cert_chain = $::puppet::params::server_ssl_cert_chain,
+  Optional[String]                             $server_ssl_crl_path   = $::puppet::params::server_ssl_crl_path,
 ) inherits puppet::params {
 
   if $puppetdb and !$puppetdb_server {

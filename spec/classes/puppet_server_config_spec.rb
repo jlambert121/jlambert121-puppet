@@ -121,12 +121,12 @@ describe 'puppet::server::config', :type => :class do
     end
 
     context 'with ssl-ca-cert' do
-      let(:pre_condition) { 'class { "puppet": server => true, server_ca_cert => "/example/path" } ' }
+      let(:pre_condition) { 'class { "puppet": server => true, server_ssl_ca_cert => "/example/path" } ' }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf').with(:content => /\/example\/path/) }
     end
 
     context 'with ssl-cert-chain' do
-      let(:pre_condition) { 'class { "puppet": server => true, server_cert_chain => "/example/path" } ' }
+      let(:pre_condition) { 'class { "puppet": server => true, server_ssl_cert_chain => "/example/path" } ' }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf').with(:content => /\/example\/path/) }
     end
 
