@@ -1,7 +1,7 @@
 # document me
 class puppet::agent::config (
   $agent           = $::puppet::agent,
-  $environment     = $::puppet::environment,
+  $environment     = $::puppet::_environment,
   $use_srv_records = $::puppet::use_srv_records,
   $puppetmaster    = $::puppet::puppetmaster,
   $runinterval     = $::puppet::runinterval,
