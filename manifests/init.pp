@@ -47,13 +47,17 @@ class puppet (
     $ensure = 'absent'
   }
 
+  if ($server and $runmode == 'service') {
+    Service['puppetserver'] -> Service['puppet']
+  }
+
   class { '::puppet::common': }
 
-  class { '::puppet::agent':
+  class { '::puppet::server':
     require => Class['puppet::common'],
   } ->
 
-  class { '::puppet::server':
+  class { '::puppet::agent':
     require => Class['puppet::common'],
   }
 
