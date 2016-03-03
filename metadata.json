@@ -1,6 +1,6 @@
 {
   "name": "jlambert121-puppet",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "author": "Justin Lambert",
   "summary": "Module to manage puppet, puppet-server",
   "license": "Apache-2.0",

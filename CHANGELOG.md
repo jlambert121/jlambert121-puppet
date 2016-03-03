@@ -1,6 +1,17 @@
 # Change Log
 
-## [0.8.0](https://github.com/jlambert121/jlambert121-puppet/tree/0.7.0) (2016-03-03)
+## [0.8.1](https://github.com/jlambert121/jlambert121-puppet/tree/0.8.0) (2016-03-03)
+[Full Changelog](https://github.com/jlambert121/jlambert121-puppet/compare/0.8.0...0.8.1)
+
+**Closed issues:**
+
+- Move dns\_alt\_names to \[main\] section [\#50](https://github.com/jlambert121/jlambert121-puppet/issues/50)
+
+**Merged pull requests:**
+
+- move dns\_alt\_names up into master, placed by puppet::common [\#51](https://github.com/jlambert121/jlambert121-puppet/pull/51) ([sjoeboo](https://github.com/sjoeboo))
+
+## [0.8.0](https://github.com/jlambert121/jlambert121-puppet/tree/0.8.0) (2016-03-03)
 [Full Changelog](https://github.com/jlambert121/jlambert121-puppet/compare/0.7.0...0.8.0)
 
 **Closed issues:**
