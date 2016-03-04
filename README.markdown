@@ -205,6 +205,31 @@ Boolean.  Whether to use the deprecated /etc/puppetlabs/puppet/auth.conf (true) 
 
 Default: false
 
+#####`server_ssl_cert`
+String. Path to server ssl certificate (see https://docs.puppetlabs.com/puppetserver/2.2/config_file_webserver.html)
+
+Default: undef
+
+#####`server_ssl_key`
+String. Path to server ssl key (see https://docs.puppetlabs.com/puppetserver/2.2/config_file_webserver.html)
+
+Default: undef
+
+#####`server_ssl_ca_cert`
+String. Path to server ssl CA certificate (see https://docs.puppetlabs.com/puppetserver/2.2/config_file_webserver.html)
+
+Default: undef
+
+#####`server_ssl_cert_chain`
+String. Path to server ssl certificate chain (see https://docs.puppetlabs.com/puppetserver/2.2/config_file_webserver.html)
+
+Default: undef
+
+#####`server_ssl_crl_path`
+String. Path to server ssl CRL (see https://docs.puppetlabs.com/puppetserver/2.2/config_file_webserver.html)
+
+Default: undef
+
 
 ## Reference
 
