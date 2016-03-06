@@ -12,7 +12,7 @@ class puppet (
 
   # Server
   Optional[Array[String]]                      $dns_alt_names         = $::puppet::params::dns_alt_names,
-  Optional[Array[String]]                      $autosign              = $::puppet::params::autosign,
+  Optional[Array]                              $autosign              = $::puppet::params::autosign,
   Optional[Hash[String, Hash[String, String]]] $fileserver_conf       = $::puppet::params::fileserver_conf,
   Boolean                                      $manage_hiera          = $::puppet::params::manage_hiera,
   Optional[Pattern[/\Apuppet/]]                $hiera_source          = $::puppet::params::hiera_source,
