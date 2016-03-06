@@ -127,12 +127,12 @@ class puppet::server::config (
       content => template('puppet/server/puppetdb.conf.erb'),
     }
   }
-  
+
   if ( $server and $autosign ) {
     # Template autosign.conf
     # - $autosign
     file { '/etc/puppetlabs/puppet/autosign.conf':
-      content => template('puppet/server/autosign.conf.erb')
+      content => template('puppet/server/autosign.conf.erb'),
     }
   }
 
