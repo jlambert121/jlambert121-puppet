@@ -105,6 +105,11 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_concat__fragment('puppet_master').with(:content => /reports = puppetdb, hipchat/) }
     end
 
+    context 'with autosign' do
+      let(:pre_condition) { 'class { "puppet": server => true, autosign => ["test.domain"] }'}
+      it { should contain_file('/etc/puppetlabs/puppet/autosign.conf').with(:content => /test\.domain/) }
+    end
+
     context 'with firewall' do
       let(:pre_condition) { 'class { "puppet": server => true, firewall => true }' }
       it { should contain_firewall('500 allow inbound connections to puppetserver') }

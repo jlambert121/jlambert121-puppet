@@ -1,6 +1,7 @@
 # document me
 class puppet::server::config (
   $ca_enabled            = $::puppet::server_ca_enabled,
+  $autosign              = $::puppet::autosign,
   $config_dir            = $::puppet::params::server_config_dir,
   $fileserver            = $::puppet::fileserver_conf,
   $manage_hiera          = $::puppet::manage_hiera,
@@ -124,6 +125,14 @@ class puppet::server::config (
     # - $puppetdb_server
     file { '/etc/puppetlabs/puppet/puppetdb.conf':
       content => template('puppet/server/puppetdb.conf.erb'),
+    }
+  }
+
+  if ( $server and $autosign ) {
+    # Template autosign.conf
+    # - $autosign
+    file { '/etc/puppetlabs/puppet/autosign.conf':
+      content => template('puppet/server/autosign.conf.erb'),
     }
   }
 
