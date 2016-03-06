@@ -107,7 +107,7 @@ describe 'puppet::server::config', :type => :class do
 
     context 'with autosign' do
       let(:pre_condition) { 'class { "puppet": server => true, autosign => ["*.test.domain"] }'}
-      it { should contain_file('/etc/puppetlabs/puppet/autosign.conf').with(:content => /'*.test.domain'/) }
+      it { should contain_file('/etc/puppetlabs/puppet/autosign.conf').with(:content => /\*\.test\.domain/) }
     end
 
     context 'with firewall' do
