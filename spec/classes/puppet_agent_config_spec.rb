@@ -12,7 +12,7 @@ describe 'puppet::agent::config', :type => :class do
   end
 
   describe 'set environment' do
-    let(:pre_condition) { 'class{"::puppet": environment => "dev"}' }
+    let(:pre_condition) { 'class{"::puppet": env => "dev"}' }
     it { should contain_concat__fragment('puppet_agent').with(:content => /environment\s+=\s+dev/) }
   end
 

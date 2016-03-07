@@ -1,16 +1,17 @@
 # document me
 class puppet::agent::config (
   $agent           = $::puppet::agent,
-  $environment     = $::puppet::environment,
+  $env             = $::puppet::env,
   $use_srv_records = $::puppet::use_srv_records,
   $puppetmaster    = $::puppet::puppetmaster,
   $runinterval     = $::puppet::runinterval,
 ) {
 
-  if $environment {
-    $_environment = $environment
-  } else {
-    $_environment = $::environment
+  if $env == undef {
+    $env_real = $::environment
+  }
+  else {
+    $env_real = $env
   }
 
   concat::fragment { 'puppet_agent':
