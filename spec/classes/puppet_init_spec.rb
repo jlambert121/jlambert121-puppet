@@ -31,7 +31,36 @@ describe 'puppet', :type => :class do
       let(:params) { { :runmode => 'breakme' } }
       it { expect { should create_class('puppet') }.to raise_error(/expects a match for Enum/) }
     end
+    context 'bad autosign' do
+      let(:params) { { :autosign => false } }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a String value/) }
+    end
 
+    context 'bad autosign_runnable' do
+      let(:params) { { :autosign_runnable => 'breakme' } }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a Boolean value/) }
+    end
+
+    context 'bad autosign_list' do
+      let(:params) { { :autosign_list => 'breakme' } }
+      it { expect { should create_class('puppet') }.to raise_error(/expects an Array value/) }
+    end
+
+    context 'bad autosign_script' do
+      let(:params) { { :autosign_script => false } }
+      it { expect { should create_class('puppet') }.to raise_error(/expects a String value/) }
+    end
+
+    context 'autosign_runnable, no autosign_script' do
+      let(:params) { { :autosign_runnable => true } }
+      it { expect { should create_class('puppet')}.to raise_error(/requires autosign_script/) }
+    end
+
+    context 'autosign_list, autosign_script' do
+      let(:params) { { :autosign_list => ["blah", "blah"], :autosign_script => '/bin/false' } }
+      it { expect { should create_class('puppet')}.to raise_error(/autosign_list and autosign_script/) }
+    end
+    
     context 'bad hiera_source' do
       let(:params) { { :hiera_source => 'breakme' } }
       it { expect { should create_class('puppet') }.to raise_error(/expects a match for Pattern/) }

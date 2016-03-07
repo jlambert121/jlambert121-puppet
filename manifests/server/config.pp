@@ -1,5 +1,9 @@
 # document me
 class puppet::server::config (
+  $autosign              = $::puppet::autosign,
+  $autosign_runnable     = $::puppet::autosign_runnable,
+  $autosign_list         = $::puppet::autosign_list,
+  $autosign_script       = $::puppet::autosign_script,
   $ca_enabled            = $::puppet::server_ca_enabled,
   $config_dir            = $::puppet::params::server_config_dir,
   $fileserver            = $::puppet::fileserver_conf,
@@ -103,6 +107,22 @@ class puppet::server::config (
   } elsif $manage_hiera {
     file { '/etc/puppetlabs/code/hiera.yaml':
       ensure => 'absent',
+    }
+  }
+  
+  if ( $autosign_runnable ) {
+    $autosign_mode    = '0550'
+    $autosign_content = $autosign_script
+  }
+  else {
+    $autosign_mode = '0440'
+    $autosign_content = join($autosign_list, '\n')
+  }
+
+  if ($server and ($autosign_list != [] or $autosign_script != '' )) {
+    file { $autosign:
+      content => $autosign_content,
+      mode    => $autosign_mode,
     }
   }
 

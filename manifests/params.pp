@@ -9,6 +9,10 @@ class puppet::params {
   $environment = undef
   $puppetmaster = "puppet.${::domain}"
 
+  $autosign = '/etc/puppetlabs/puppet/autosign.conf'
+  $autosign_runnable = false
+  $autosign_list     = []
+  $autosign_script   = undef
   $dns_alt_names = undef
   $fileserver_conf = undef
   $manage_hiera = true
