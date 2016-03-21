@@ -29,6 +29,12 @@ class puppet::params {
   $firewall = false
   $jruby_instances = $::processors[count]-1
   $use_legacy_auth = false
+  $server_ssl_cert = undef
+  $server_ssl_key = undef
+  $server_ssl_ca_cert = undef
+  $server_ssl_cert_chain = undef
+  $server_ssl_crl_path = undef
+
 
   case $::osfamily {
     'Debian': {

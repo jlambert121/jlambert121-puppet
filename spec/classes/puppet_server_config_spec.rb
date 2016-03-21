@@ -105,16 +105,35 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_concat__fragment('puppet_master').with(:content => /reports = puppetdb, hipchat/) }
     end
 
-    context 'with dns_alt_names' do
-      let(:pre_condition) { 'class { "puppet": server => true, dns_alt_names => ["puppet.example.com"] }'}
-      it { should contain_concat__fragment('puppet_master').with(:content => /dns_alt_names = puppet.example.com/) }
-    end
-
     context 'with firewall' do
       let(:pre_condition) { 'class { "puppet": server => true, firewall => true }' }
       it { should contain_firewall('500 allow inbound connections to puppetserver') }
     end
 
+    context 'with ssl-cert' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_ssl_cert => "/example/path" } ' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf').with(:content => /\/example\/path/) }
+    end
+
+    context 'with ssl-ssl-key' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_ssl_cert => "/example/path" } ' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf').with(:content => /\/example\/path/) }
+    end
+
+    context 'with ssl-ca-cert' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_ssl_ca_cert => "/example/path" } ' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf').with(:content => /\/example\/path/) }
+    end
+
+    context 'with ssl-cert-chain' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_ssl_cert_chain => "/example/path" } ' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf').with(:content => /\/example\/path/) }
+    end
+
+    context 'with ssl-crl-path' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_ssl_crl_path => "/example/path" } ' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf').with(:content => /\/example\/path/) }
+    end
   end
 
 end
