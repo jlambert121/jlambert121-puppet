@@ -5,6 +5,7 @@ class puppet::agent::config (
   $use_srv_records = $::puppet::use_srv_records,
   $puppetmaster    = $::puppet::puppetmaster,
   $runinterval     = $::puppet::runinterval,
+  $conf_dir        = $::puppet::conf_dir,
 ) {
 
   if $environment {
@@ -14,7 +15,7 @@ class puppet::agent::config (
   }
 
   concat::fragment { 'puppet_agent':
-    target  => '/etc/puppetlabs/puppet/puppet.conf',
+    target  => "${conf_dir}/puppet.conf",
     content => template("${module_name}/puppet.agent.erb"),
     order   => '05',
   }

@@ -9,6 +9,7 @@ class puppet (
   Enum['cron', 'service', 'none']              $runmode           = $::puppet::params::runmode,
   Optional[String]                             $_environment       = $::puppet::params::_environment,
   String                                       $puppetmaster      = $::puppet::params::puppetmaster,
+  String                                       $conf_dir          = $::puppet::params::conf_dir,
 
   # Server
   Optional[Array[String]]                      $dns_alt_names     = $::puppet::params::dns_alt_names,
@@ -49,6 +50,10 @@ class puppet (
 
   if ($server and $runmode == 'service') {
     Service['puppetserver'] -> Service['puppet']
+  }
+
+  if ($server and !($::osfamily in ['Debian','RedHat'])) {
+    fail("Server on ${::osfamily} is not supported")
   }
 
   class { '::puppet::common': }

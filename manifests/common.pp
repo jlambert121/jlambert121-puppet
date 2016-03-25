@@ -8,24 +8,27 @@ class puppet::common(
   $srv_domain      = $::puppet::srv_domain,
   $use_srv_records = $::puppet::use_srv_records,
   $dns_alt_names   = $::puppet::dns_alt_names,
+  $conf_dir        = $::puppet::conf_dir,
 ) {
 
-  concat { '/etc/puppetlabs/puppet/puppet.conf':
+  concat { "${conf_dir}/puppet.conf":
     ensure => $ensure,
   }
 
   concat::fragment { 'puppet_main':
-    target  => '/etc/puppetlabs/puppet/puppet.conf',
+    target  => "${conf_dir}/puppet.conf",
     content => template("${module_name}/puppet.main.erb"),
     order   => '01',
   }
 
-  file { '/etc/puppetlabs/puppet/auth.conf':
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => template("${module_name}/auth.conf.erb"),
+  if $::osfamily != 'Windows' {
+    file { "${conf_dir}/auth.conf":
+      ensure  => 'file',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      content => template("${module_name}/auth.conf.erb"),
+    }
   }
 
 }

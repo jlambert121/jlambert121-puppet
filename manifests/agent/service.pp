@@ -11,34 +11,66 @@ class puppet::agent::service (
 
   case $runmode {
     'cron': {
-      cron { 'puppet':
-        ensure  => 'present',
-        user    => 'root',
-        command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize',
-        hour    => '*',
-        minute  =>  [ fqdn_rand(30), fqdn_rand(30) + 30 ],
+      case $::kernel {
+        'Windows': {
+          scheduled_task { 'puppet':
+            ensure    => 'present',
+            command   => 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
+            arguments => 'agent --onetime --no-daemonize',
+            trigger   => {
+              schedule         => daily,
+              start_time       => '00:00',
+              minutes_interval => 30,
+              minutes_duration => 31,
+            }
+          }
+        }
+        'Linux': {
+          cron { 'puppet':
+            ensure  => 'present',
+            user    => 'root',
+            command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize',
+            hour    => '*',
+            minute  =>  [ fqdn_rand(30), fqdn_rand(30) + 30 ],
+          }
+        }
       }
-
       service { 'puppet':
         ensure => 'stopped',
         enable => false,
       }
     }
     'service': {
-      cron { 'puppet':
-        ensure => 'absent',
+      case $::osfamily {
+        'Windows': {
+          scheduled_task { 'puppet':
+            ensure => 'absent',
+          }
+        }
+        'Linux': {
+          cron { 'puppet':
+            ensure => 'absent',
+          }
+        }
       }
-
       service { 'puppet':
         ensure => 'running',
         enable => true,
       }
     }
     'none': {
-      cron { 'puppet':
-        ensure => 'absent',
+      case $::kernel {
+        'Windows': {
+          scheduled_task { 'puppet':
+            ensure => 'absent',
+          }
+        }
+        'Linux': {
+          cron { 'puppet':
+            ensure => 'absent',
+          }
+        }
       }
-
       service { 'puppet':
         ensure => 'stopped',
         enable => false,

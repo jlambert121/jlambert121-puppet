@@ -33,9 +33,15 @@ class puppet::params {
   case $::osfamily {
     'Debian': {
       $server_config_dir = '/etc/default'
+      $conf_dir = '/etc/puppetlabs/puppet'
     }
     'RedHat': {
       $server_config_dir = '/etc/sysconfig'
+      $conf_dir = '/etc/puppetlabs/puppet'
+    }
+    'Windows': {
+      $server_config_dir = undef
+      $conf_dir = 'C:/ProgramData/PuppetLabs/puppet/etc'
     }
     default: {
       fail("${::osfamily} is not supported.")
