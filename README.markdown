@@ -20,7 +20,7 @@ A puppet module to manage puppet-agent and puppetserver (the closure server, not
 
 ## Module Description
 
-This is a puppet module to manage puppet >= 4.0.0 and puppetserver >= 2.0.0.
+This is a puppet module to manage puppet >= 4.0.0 and puppetserver >= 2.3.0.
 
 Currently acceptance tests are a bit wonky due to beaker's inability to handle puppet AIO packages
 
@@ -178,7 +178,7 @@ Default: undef
 #####`server_java_opts`
 String.  Java options for puppet server
 
-Default: -Xms2g -Xmx2g -XX:MaxPermSize=256m
+Default: -Xms2g -Xmx2g 
 
 #####`server_log_dir`
 String.  Location of puppetserver logs
