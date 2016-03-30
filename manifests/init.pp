@@ -1,14 +1,14 @@
 #
 class puppet (
-  Boolean                                      $agent                 = true,
-  Boolean                                      $server                = false,
-  String                                       $agent_version         = $::puppet::params::agent_version,
-  Optional[String]                             $ca_server             = $::puppet::params::ca_server,
-  Boolean                                      $use_srv_records       = $::puppet::params::use_srv_records,
-  Optional[String]                             $srv_domain            = $::puppet::params::srv_domain,
-  Enum['cron', 'service', 'none']              $runmode               = $::puppet::params::runmode,
-  Optional[String]                             $environment           = $::puppet::params::environment,
-  String                                       $puppetmaster          = $::puppet::params::puppetmaster,
+  Boolean                                      $agent           = true,
+  Boolean                                      $server          = false,
+  String                                       $agent_version   = $::puppet::params::agent_version,
+  Optional[String]                             $ca_server       = $::puppet::params::ca_server,
+  Boolean                                      $use_srv_records = $::puppet::params::use_srv_records,
+  Optional[String]                             $srv_domain      = $::puppet::params::srv_domain,
+  Enum['cron', 'service', 'none']              $runmode         = $::puppet::params::runmode,
+  Optional[String]                             $env             = $::puppet::params::env,
+  String                                       $puppetmaster    = $::puppet::params::puppetmaster,
 
   # Server
   Optional[Array[String]]                      $dns_alt_names         = $::puppet::params::dns_alt_names,
