@@ -1,6 +1,17 @@
 # Change Log
 
-## [0.8.1](https://github.com/jlambert121/jlambert121-puppet/tree/0.8.0) (2016-03-03)
+## [0.8.2](https://github.com/jlambert121/jlambert121-puppet/tree/0.8.2)
+
+[Full Changelog](https://github.com/jlambert121/jlambert121-puppet/compare/0.8.1...0.8.2)
+
+**Merged pull requests:**
+
+- update bootstrap.cfg for puppetserver 2.3.0 [\#62](https://github.com/jlambert121/jlambert121-puppet/pull/62) ([jlambert121](https://github.com/jlambert121))
+- Update concat dep, fix puppetserver 2.3 and remove deprecated java [\#61](https://github.com/jlambert121/jlambert121-puppet/pull/61) ([supernovae](https://github.com/supernovae))
+- fix environment issue + tests [\#57](https://github.com/jlambert121/jlambert121-puppet/pull/57) ([sjoeboo](https://github.com/sjoeboo))
+- add webserver.conf ssl cert/path settings + tests [\#53](https://github.com/jlambert121/jlambert121-puppet/pull/53) ([sjoeboo](https://github.com/sjoeboo))
+
+## [0.8.1](https://github.com/jlambert121/jlambert121-puppet/tree/0.8.1) (2016-03-03)
 [Full Changelog](https://github.com/jlambert121/jlambert121-puppet/compare/0.8.0...0.8.1)
 
 **Closed issues:**
