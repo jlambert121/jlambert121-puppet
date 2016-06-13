@@ -6,6 +6,7 @@
   codedir = /etc/puppetlabs/code
 
   always_cache_features = true
+  autosign = <%= @autosign %>
   ca = <%= @ca_enabled %>
 
 <% if @reports && @reports.length > 0 -%>
