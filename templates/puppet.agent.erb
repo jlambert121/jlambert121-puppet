@@ -5,3 +5,6 @@
 <% if !@use_srv_records -%>
   server            = <%= if ( @puppetmaster and !@puppetmaster.empty? ) then @puppetmaster else @fqdn end %>
 <% end -%>
+<% if !@report.nil? -%>
+  report            = <%= @report %>
+<% end -%>
