@@ -9,6 +9,7 @@ class puppet (
   Enum['cron', 'service', 'none']              $runmode         = $::puppet::params::runmode,
   Optional[String]                             $env             = $::puppet::params::env,
   String                                       $puppetmaster    = $::puppet::params::puppetmaster,
+  Boolean                                      $report          = $::puppet::params::report,
 
   # Server
   Optional[Array[String]]                      $dns_alt_names         = $::puppet::params::dns_alt_names,

@@ -8,6 +8,7 @@ class puppet::params {
   $runmode = 'cron'
   $env = undef
   $puppetmaster = "puppet.${::domain}"
+  $report = undef
 
   $dns_alt_names = undef
   $fileserver_conf = undef

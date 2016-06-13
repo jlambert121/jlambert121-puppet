@@ -5,6 +5,7 @@ class puppet::agent::config (
   $use_srv_records = $::puppet::use_srv_records,
   $puppetmaster    = $::puppet::puppetmaster,
   $runinterval     = $::puppet::runinterval,
+  $report          = $::puppet::report,
 ) {
 
   if $env == undef {
