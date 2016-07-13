@@ -72,6 +72,9 @@ String.  Version of the puppet agent to install
 
 Default: latest
 
+#####`puppetmaster`
+String. Hostname of the puppet master server.
+
 #####`ca_server`
 String.  Hostname of the CA server to be used by the agent
 
@@ -178,7 +181,7 @@ Default: undef
 #####`server_java_opts`
 String.  Java options for puppet server
 
-Default: -Xms2g -Xmx2g 
+Default: -Xms2g -Xmx2g
 
 #####`server_log_dir`
 String.  Location of puppetserver logs
