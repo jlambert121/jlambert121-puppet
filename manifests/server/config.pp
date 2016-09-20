@@ -40,16 +40,32 @@ class puppet::server::config (
 
   case $server_version {
     /(\d+\.\d+)\.\d+\-\d+.*/: {
-      $config_version = 0 + $1 # This must be a float 
+      $config = 0 + $1 # This must be a float 
     }
     'latest': {
       # There is a breaking confign change for version 2.6 and later.
-      $config_version = 2.6
+      $config = 2.6
+
     }
     default: {
-      $config_version = 2.5
+      $config = 2.5
     }
   }
+
+  if (
+      $config >= 2.6
+    ) and (
+      $bootstrap_dir == $::puppet::params::server_bootstrap_dir
+    ) {
+      $parsed_bootstrap_dir  = '/etc/puppetlabs/puppetserver/services.d/,/opt/puppetlabs/server/apps/puppetserver/config/services.d/'
+      $bootstrap_install_dir = '/opt/puppetlabs/server/apps/puppetserver/config/services.d'
+  } else {
+      $parsed_bootstrap_dir = $bootstrap_dir
+      $bootstrap_install_dir = '/etc/puppetlabs/puppetserver'
+  }
+
+  
+
 
   if $server {
     file { $log_dir:
@@ -69,7 +85,7 @@ class puppet::server::config (
   }
 
   # Template uses
-  # - $
+  # - $parsed_bootstrap_dir
   # - $java_opts
   file { "${config_dir}/puppetserver":
     content => template("${module_name}/server/puppetserver.sysconfig.erb"),
@@ -77,7 +93,7 @@ class puppet::server::config (
 
   # Template uses
   # - $ca_enabled
-  file { '/etc/puppetlabs/puppetserver/bootstrap.cfg':
+  file { "${bootstrap_install_dir}/bootstrap.cfg":
     content => template("${module_name}/server/bootstrap.cfg.erb"),
   }
 
