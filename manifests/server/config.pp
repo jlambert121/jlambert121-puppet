@@ -6,9 +6,11 @@ class puppet::server::config (
   $manage_hiera          = $::puppet::manage_hiera,
   $hiera_source          = $::puppet::hiera_source,
   $java_opts             = $::puppet::server_java_opts,
+  $bootstrap_dir         = $::puppet::server_bootstrap_dir,
   $log_dir               = $::puppet::server_log_dir,
   $log_file              = $::puppet::server_log_file,
   $server                = $::puppet::server,
+  $server_version        = $::puppet::server_version,
   $runinterval           = $::puppet::runinterval,
   $puppetdb              = $::puppet::puppetdb,
   $puppetdb_port         = $::puppet::puppetdb_port,
@@ -36,6 +38,35 @@ class puppet::server::config (
     group  => 'puppet',
   }
 
+  case $server_version {
+    /(\d+\.\d+)\.\d+\-\d+.*/: {
+      $config = 0 + $1 # This must be a float 
+    }
+    'latest': {
+      # There is a breaking confign change for version 2.6 and later.
+      $config = 2.6
+
+    }
+    default: {
+      $config = 2.5
+    }
+  }
+
+  if (
+      $config >= 2.6
+    ) and (
+      $bootstrap_dir == $::puppet::params::server_bootstrap_dir
+    ) {
+      $parsed_bootstrap_dir  = '/etc/puppetlabs/puppetserver/services.d/,/opt/puppetlabs/server/apps/puppetserver/config/services.d/'
+      $bootstrap_install_dir = '/opt/puppetlabs/server/apps/puppetserver/config/services.d'
+  } else {
+      $parsed_bootstrap_dir = $bootstrap_dir
+      $bootstrap_install_dir = '/etc/puppetlabs/puppetserver'
+  }
+
+  
+
+
   if $server {
     file { $log_dir:
       ensure => 'directory',
@@ -54,6 +85,7 @@ class puppet::server::config (
   }
 
   # Template uses
+  # - $parsed_bootstrap_dir
   # - $java_opts
   file { "${config_dir}/puppetserver":
     content => template("${module_name}/server/puppetserver.sysconfig.erb"),
@@ -61,7 +93,7 @@ class puppet::server::config (
 
   # Template uses
   # - $ca_enabled
-  file { '/etc/puppetlabs/puppetserver/bootstrap.cfg':
+  file { "${bootstrap_install_dir}/bootstrap.cfg":
     content => template("${module_name}/server/bootstrap.cfg.erb"),
   }
 

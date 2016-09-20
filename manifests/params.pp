@@ -21,6 +21,7 @@ class puppet::params {
   $runinterval = '30m'
   $server_ca_enabled = true
   $server_certname = undef
+  $server_bootstrap_dir = '/etc/puppetlabs/puppetserver/bootstrap.cfg'
   $server_java_opts = '-Xms2g -Xmx2g'
   $server_log_dir = '/var/log/puppetlabs/puppetserver'
   $server_log_file = 'puppetserver.log'

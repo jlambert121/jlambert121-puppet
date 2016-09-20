@@ -16,3 +16,8 @@ puppetlabs.services.ca.certificate-authority-service/certificate-authority-servi
 <% else -%>
 puppetlabs.services.ca.certificate-authority-disabled-service/certificate-authority-disabled-service
 <% end -%>
+<% if @config >= 2.6 -%>
+puppetlabs.services.jruby-pool-manager.jruby-pool-manager-service/jruby-pool-manager-service
+puppetlabs.trapperkeeper.services.scheduler.scheduler-service/scheduler-service
+puppetlabs.trapperkeeper.services.status.status-service/status-service
+<% end -%>

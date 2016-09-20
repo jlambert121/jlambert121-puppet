@@ -7,7 +7,7 @@ describe 'puppet::server::config', :type => :class do
     let(:pre_condition) { 'class { "puppet": }' }
 
     it { should_not contain_concat__fragment('puppet_master') }
-    it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:ensure => 'absent') }
+    it { should contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:ensure => 'absent') }
     it { should contain_file('/etc/puppetlabs/puppetserver/logback.xml').with(:ensure => 'absent') }
     it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/ca.conf').with(:ensure => 'absent') }
     it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/global.conf').with(:ensure => 'absent') }
@@ -39,8 +39,6 @@ describe 'puppet::server::config', :type => :class do
       it { should_not contain_concat__fragment('puppet_master').with(:content => /reports/) }
       it { should_not contain_concat__fragment('puppet_master').with( :content => /dns_alt_names/ ) }
       it { should_not contain_concat__fragment('puppet_master').with(:content => /storeconfigs/) }
-      it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }
-      it { should_not contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-disabled\-service\/certificate\-authority\-disabled\-service/) }
       it { should contain_file('/etc/puppetlabs/puppetserver/logback.xml').with(:content => /<file>\/var\/log\/puppetlabs\/puppetserver\/puppetserver\.log<\/file>/) }
       it { should contain_file('/etc/puppetlabs/puppetserver/request-logging.xml') }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/ca.conf') }
@@ -48,9 +46,40 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/puppetserver.conf').with( :content => /max-active-instances: 3/ ) }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/puppetserver.conf').with( :content => /use-legacy-auth-conf: false/ ) }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf') }
-      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf') }
       it { should contain_file('/etc/puppetlabs/code/hiera.yaml').with(:ensure => 'absent') }
       it { should_not contain_firewall('500 allow inbound connections to puppetserver') }
+    end
+
+    context 'puppetserver 2.5 or earlier debian' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_version => "2.4.0-1puppetlabs1"}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').without(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+      it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').without(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/)}
+      it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }
+      it { should_not contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-disabled\-service\/certificate\-authority\-disabled\-service/) }
+    end
+
+    context 'puppetserver 2.5 or earlier redhat' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_version => "2.3.1-1.el7"}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').without(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+      it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').without(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/) }
+      it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }
+      it { should_not contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-disabled\-service\/certificate\-authority\-disabled\-service/) }
+    end
+
+    context 'puppetserver 2.6 or later ' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_version => "2.8.1-1.el7"}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').with(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+      it { should contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+      it { should contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }
+      it { should_not contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-disabled\-service\/certificate\-authority\-disabled\-service/) }
+    end
+
+    context 'latest server on new install' do
+      let(:pre_condition) { 'class { "puppet": server => true}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').with(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+      it { should contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+      it { should contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }
+      it { should_not contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-disabled\-service\/certificate\-authority\-disabled\-service/) }
     end
 
     context 'redhat' do
@@ -64,6 +93,11 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_file('/etc/default/puppetserver') }
     end
 
+    context 'set bootstrap dir' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_bootstrap_dir => "blah" }'}
+      it { should contain_file('/etc/sysconfig/puppetserver').with(:content => /BOOTSTRAP_CONFIG="blah"/) }
+    end
+
     context 'set java opts' do
       let(:pre_condition) { 'class { "puppet": server => true, server_java_opts => "blah" }'}
       it { should contain_file('/etc/sysconfig/puppetserver').with(:content => /JAVA_ARGS="blah"/) }
@@ -71,8 +105,8 @@ describe 'puppet::server::config', :type => :class do
 
     context 'set disable ca' do
       let(:pre_condition) { 'class { "puppet": server => true, server_ca_enabled => false }'}
-      it { should_not contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }
-      it { should contain_file('/etc/puppetlabs/puppetserver/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-disabled\-service\/certificate\-authority\-disabled\-service/) }
+      it { should_not contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-service\/certificate\-authority\-service/) }
+      it { should contain_file('/opt/puppetlabs/server/apps/puppetserver/config/services.d/bootstrap.cfg').with(:content => /puppetlabs\.services\.ca\.certificate\-authority\-disabled\-service\/certificate\-authority\-disabled\-service/) }
       it { should contain_concat__fragment('puppet_master').with(:content => /ca = false/) }
     end
 
