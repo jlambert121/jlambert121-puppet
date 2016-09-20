@@ -5,7 +5,7 @@ JAVA_ARGS="<%= @java_opts %>"
 INSTALL_DIR="/opt/puppetlabs/server/apps/puppetserver"
 JARFILE="server/apps/puppetserver/puppet-server-release.jar"
 CONFIG="/etc/puppetlabs/puppetserver/conf.d"
-BOOTSTRAP_CONFIG="/etc/puppetlabs/puppetserver/bootstrap.cfg"
+BOOTSTRAP_CONFIG="<%= @bootstrap_dir %>"
 USER="puppet"
 GROUP="puppet"
 SERVICE_STOP_RETRIES=60

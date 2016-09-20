@@ -6,9 +6,11 @@ class puppet::server::config (
   $manage_hiera          = $::puppet::manage_hiera,
   $hiera_source          = $::puppet::hiera_source,
   $java_opts             = $::puppet::server_java_opts,
+  $bootstrap_dir         = $::puppet::server_bootstrap_dir,
   $log_dir               = $::puppet::server_log_dir,
   $log_file              = $::puppet::server_log_file,
   $server                = $::puppet::server,
+  $server_version        = $::puppet::server_version,
   $runinterval           = $::puppet::runinterval,
   $puppetdb              = $::puppet::puppetdb,
   $puppetdb_port         = $::puppet::puppetdb_port,
@@ -36,6 +38,19 @@ class puppet::server::config (
     group  => 'puppet',
   }
 
+  case $server_version {
+    /(\d+\.\d+)\.\d+\-\d+.*/: {
+      $config_version = 0 + $1 # This must be a float 
+    }
+    'latest': {
+      # There is a breaking confign change for version 2.6 and later.
+      $config_version = 2.6
+    }
+    default: {
+      $config_version = 2.5
+    }
+  }
+
   if $server {
     file { $log_dir:
       ensure => 'directory',
@@ -54,6 +69,7 @@ class puppet::server::config (
   }
 
   # Template uses
+  # - $
   # - $java_opts
   file { "${config_dir}/puppetserver":
     content => template("${module_name}/server/puppetserver.sysconfig.erb"),

@@ -21,6 +21,7 @@ class puppet (
   String                                       $puppetdb_version      = $::puppet::params::puppetdb_version,
   Boolean                                      $manage_puppetdb       = $::puppet::params::manage_puppetdb,
   String                                       $runinterval           = $::puppet::params::runinterval,
+  String                                       $server_bootstrap_dir  = $::puppet::params::server_bootstrap_dir,
   Boolean                                      $server_ca_enabled     = $::puppet::params::server_ca_enabled,
   Optional[String]                             $server_certname       = $::puppet::params::server_certname,
   String                                       $server_java_opts      = $::puppet::params::server_java_opts,

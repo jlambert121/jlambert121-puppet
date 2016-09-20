@@ -48,9 +48,28 @@ describe 'puppet::server::config', :type => :class do
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/puppetserver.conf').with( :content => /max-active-instances: 3/ ) }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/puppetserver.conf').with( :content => /use-legacy-auth-conf: false/ ) }
       it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf') }
-      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/webserver.conf') }
       it { should contain_file('/etc/puppetlabs/code/hiera.yaml').with(:ensure => 'absent') }
       it { should_not contain_firewall('500 allow inbound connections to puppetserver') }
+    end
+
+    context 'puppetserver 2.5 or earlier debian' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_version => "2.4.0-1puppetlabs1"}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').without(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+    end
+
+    context 'puppetserver 2.5 or earlier redhat' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_version => "2.3.1-1.el7"}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').without(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+    end
+
+    context 'puppetserver 2.6 or later ' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_version => "2.8.1-1.el7"}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').with(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
+    end
+
+    context 'latest server on new install' do
+      let(:pre_condition) { 'class { "puppet": server => true}' }
+      it { should contain_file('/etc/puppetlabs/puppetserver/conf.d/web-routes.conf').with(:content => /puppetlabs\.trapperkeeper\.services\.status\.status\-service\/status\-service/ ) }
     end
 
     context 'redhat' do
@@ -62,6 +81,11 @@ describe 'puppet::server::config', :type => :class do
       let(:facts) { { :concat_basedir => '/var/lib/puppet/concat', :domain => 'example.com', :osfamily => 'Debian', :id => '0', :path => '/bin', :kernel => 'Linux' } }
       let(:pre_condition) { 'class { "puppet": server => true}' }
       it { should contain_file('/etc/default/puppetserver') }
+    end
+
+    context 'set bootstrap dir' do
+      let(:pre_condition) { 'class { "puppet": server => true, server_bootstrap_dir => "blah" }'}
+      it { should contain_file('/etc/sysconfig/puppetserver').with(:content => /BOOTSTRAP_CONFIG="blah"/) }
     end
 
     context 'set java opts' do
