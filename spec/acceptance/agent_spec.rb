@@ -40,7 +40,7 @@ describe 'puppet::agent classes' do
     end
 
     describe cron do
-      it { should have_entry '3,33 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
+      it { should have_entry '23,53 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
     end
   end # cron runmode
 
@@ -61,7 +61,7 @@ describe 'puppet::agent classes' do
     end
 
     describe cron do
-      it { should_not have_entry '3,33 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
+      it { should_not have_entry '23,53 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
     end
 
   end # service runmode
@@ -83,7 +83,7 @@ describe 'puppet::agent classes' do
     end
 
     describe cron do
-      it { should_not have_entry '3,33 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
+      it { should_not have_entry '23,53 * * * * /opt/puppetlabs/bin/puppet agent --onetime --no-daemonize' }
     end
 
   end # none runmode
