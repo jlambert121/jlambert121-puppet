@@ -72,6 +72,11 @@ String.  Version of the puppet agent to install
 
 Default: latest
 
+#####`puppetmaster`
+String.  Hostname of puppetmaster(s) to fetch catalogs from.
+
+Default: "puppet.${::domain}"
+
 #####`ca_server`
 String.  Hostname of the CA server to be used by the agent
 
