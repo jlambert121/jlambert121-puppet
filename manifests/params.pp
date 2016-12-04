@@ -36,7 +36,7 @@ class puppet::params {
   $server_ssl_crl_path = undef
   $autosign = false
   $autosign_method = 'file'
-  $autosign_file = undef
+  $autosign_file = '/etc/puppetlabs/puppet/autosign.conf'
   $autosign_white_list = []
 
 
