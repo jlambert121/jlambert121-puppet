@@ -15,3 +15,8 @@
   storeconfigs = true
   storeconfigs_backend = puppetdb
 <% end -%>
+
+<% if @autosign -%>
+  autosign_method = 'file'
+  autosign_file = <%= @autosign_file %>
+<% end -%>

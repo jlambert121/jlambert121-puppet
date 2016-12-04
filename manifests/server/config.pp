@@ -23,6 +23,9 @@ class puppet::server::config (
   $server_ssl_ca_cert    = $::puppet::server_ssl_ca_cert,
   $server_ssl_cert_chain = $::puppet::server_ssl_cert_chain,
   $server_ssl_crl_path   = $::puppet::server_ssl_crl_path,
+  $autosign              = $::puppet::autosign,
+  $autosign_method       = $::puppet::autosign_method,
+  $autosign_file         = $::puppet::autosign_file
 ) {
 
   $file_ensure = $server ? {
@@ -124,6 +127,13 @@ class puppet::server::config (
     # - $puppetdb_server
     file { '/etc/puppetlabs/puppet/puppetdb.conf':
       content => template('puppet/server/puppetdb.conf.erb'),
+    }
+  }
+
+  ##
+  if( $server and $autosign and $autosign_method == 'file') {
+    file { '/etc/puppetlabs/puppet/autosign.conf':
+      content => template("${module_name}/autosign.conf.erb")
     }
   }
 

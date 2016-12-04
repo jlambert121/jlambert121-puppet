@@ -36,6 +36,10 @@ class puppet (
   Optional[String]                             $server_ssl_ca_cert    = $::puppet::params::server_ssl_ca_cert,
   Optional[String]                             $server_ssl_cert_chain = $::puppet::params::server_ssl_cert_chain,
   Optional[String]                             $server_ssl_crl_path   = $::puppet::params::server_ssl_crl_path,
+  Optional[String]                             $autosign              = $::puppet::params::autosign,
+  Optional[String]                             $autosign_method       = $::puppet::params::autosign_method,
+  Optional[String]                             $autosign_file         = $::puppet::params::autosign_file,
+  Optional[Array[String]]                      $autosign_white_list   = $::puppet::params::autosign_white_list
 ) inherits puppet::params {
 
   if $puppetdb and !$puppetdb_server {
