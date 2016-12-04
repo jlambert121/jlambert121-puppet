@@ -37,7 +37,7 @@ class puppet::params {
   $autosign = false
   $autosign_method = 'file'
   $autosign_file = '/etc/puppetlabs/puppet/autosign.conf'
-  $autosign_white_list = []
+  $autosign_white_list = [ ]
 
 
   case $::osfamily {

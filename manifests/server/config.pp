@@ -25,7 +25,8 @@ class puppet::server::config (
   $server_ssl_crl_path   = $::puppet::server_ssl_crl_path,
   $autosign              = $::puppet::autosign,
   $autosign_method       = $::puppet::autosign_method,
-  $autosign_file         = $::puppet::autosign_file
+  $autosign_file         = $::puppet::autosign_file,
+  $autosign_white_list   = $::puppet::autosign_white_list
 ) {
 
   $file_ensure = $server ? {
