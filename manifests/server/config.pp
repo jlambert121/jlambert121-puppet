@@ -133,7 +133,7 @@ class puppet::server::config (
   ##
   if( $server and $autosign and $autosign_method == 'file') {
     file { '/etc/puppetlabs/puppet/autosign.conf':
-      content => template("${module_name}/autosign.conf.erb")
+      content => template("${module_name}/autosign.conf.erb"),
     }
   }
 
