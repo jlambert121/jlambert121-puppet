@@ -136,7 +136,7 @@ describe 'puppet::server::config', :type => :class do
     end
 
     context 'with autosign' do
-      let(:pre_condition) { 'class { "puppet": server => true, autosign => true, autosign_method => 'file', autosign_file => '/etc/puppetlabs/puppet/autosign.conf'", autosign_white_list =>['foo.example.com'] } ' }
+      let(:pre_condition) { 'class { "puppet": server => true, autosign => true, autosign_method => "file", autosign_file => "/etc/puppetlabs/puppet/autosign.conf", autosign_white_list =>["foo.example.com"] } ' }
       it { should contain_file('/etc/puppetlabs/puppet/autosign.conf').with(:content => /foo\.example\.com/) }
     end
   end
