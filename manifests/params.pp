@@ -10,6 +10,7 @@ class puppet::params {
   $puppetmaster = "puppet.${::domain}"
 
   $dns_alt_names = undef
+  $autosign = undef
   $fileserver_conf = undef
   $manage_hiera = true
   $hiera_source = undef
